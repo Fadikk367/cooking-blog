@@ -12,6 +12,20 @@ const RecipeSchema = mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  comments: {
+    type: [{ type: mongoose.Types.ObjectId, ref: 'Comment' }],
+    default: []
+  },
+  meta: {
+    type: {
+      hearts: Number,
+      difficulty: {
+        type: String,
+        enum: ['easy', 'medium', 'advanced'],
+        required: true
+      }
+    }
   }
 });
 

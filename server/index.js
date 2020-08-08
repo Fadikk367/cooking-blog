@@ -47,6 +47,7 @@ app.use(bodyParser.json());
 
 // Routing
 app.use('/recipes', routing.recipesRoute);
+app.use('/comments', routing.commentsRoute);
 
 if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
   app.get('*', (req, res) => {
