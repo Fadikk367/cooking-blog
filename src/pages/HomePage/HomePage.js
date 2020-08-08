@@ -1,25 +1,26 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { fetchRecipes } from '../../data/actions';
+import { fetchRecipeCards } from '../../data/actions';
 
 
-const HomePage = ({ recipes, fetchRecipes }) => {
+const HomePage = ({ recipes, fetchRecipeCards }) => {
 
   useEffect(() => {
-    fetchRecipes();
-  }, [fetchRecipes]);
+    fetchRecipeCards();
+  }, [fetchRecipeCards]);
 
   const renderedRecipes = recipes.map(recipe => (
-    <div key={recipe._id}>
-      <h3>{recipe.title}</h3>
-      <p>{recipe.content}</p>
-      <span>{recipe.date}</span>
-    </div>
+    <Link to={`recipes/${recipe._id}`} key={recipe._id}>
+      <div>
+        <h3>{recipe.title}</h3>
+        <p>{recipe.content}</p>
+        <span>{recipe.date}</span>
+      </div>
+    </Link>
   ));
-
-  console.log(renderedRecipes);
 
   return (
     <div>
@@ -31,13 +32,13 @@ const HomePage = ({ recipes, fetchRecipes }) => {
 
 HomePage.propTypes = {
   recipes: PropTypes.array,
-  fetchRecipes: PropTypes.func
+  fetchRecipeCards: PropTypes.func
 }
 
 export default connect(state => {
   return {
-    recipes: state.recipes.recipes
+    recipes: state.recipes.recipeCards
   }
 }, {
-  fetchRecipes
+  fetchRecipeCards
 })(HomePage);

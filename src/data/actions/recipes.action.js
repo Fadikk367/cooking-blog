@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { RECIPES_GET } from '../constants';
+import { RECIPES_GET, RECIPES_ADD, RECIPE_GET } from '../constants';
 
-export const fetchRecipes = () => {
+export const fetchRecipeCards = () => {
   const promise = axios.get('recipes');
 
   console.log('recipes aciotn: ', promise);
@@ -9,5 +9,27 @@ export const fetchRecipes = () => {
   return {
     promise,
     type: RECIPES_GET
+  };
+}
+
+export const fetchRecipe = recipeId => {
+  const promise = axios.get(`${recipeId}`);
+
+  return {
+    promise,
+    type: RECIPE_GET
+  };
+}
+
+export const addRecipe = ({ title, content, difficulty}) => {
+  const promise = axios.post('recipes', {
+    title,
+    content,
+    difficulty
+  });
+
+  return {
+    promise,
+    type: RECIPES_ADD
   };
 }
