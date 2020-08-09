@@ -21,11 +21,12 @@ export const fetchRecipe = recipeId => {
   };
 }
 
-export const addRecipe = ({ title, content, difficulty}) => {
+export const addRecipe = ({ title, content, difficulty, ingredients }) => {
   const promise = axios.post('recipes', {
     title,
     content,
-    difficulty
+    difficulty,
+    ingredients
   });
 
   return {

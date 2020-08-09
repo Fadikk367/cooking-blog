@@ -16,8 +16,8 @@ const RecipePage = ({ loadedRecipes, fetchRecipe, match }) => {
   console.log(match);
 
   useEffect(() => {
-    if (loadedRecipes.has(recipeId)) {
-      setRecipe(loadedRecipes.get(recipeId))
+    if (!!loadedRecipes[recipeId]) {
+      setRecipe(loadedRecipes[recipeId])
     } else {
       fetchRecipe(recipeId);
     }
@@ -30,7 +30,14 @@ const RecipePage = ({ loadedRecipes, fetchRecipe, match }) => {
 
   const renderedRecipe = recipe ? (
     <div>
-      {recipe.title}
+      <h2>{recipe.title}</h2>
+      <ul>
+        {recipe.ingredients.map(ingredient => (
+            <li>{ingredient}</li>
+          )
+        )}
+      </ul>
+      <p>{recipe.content}</p>
       <h3>HURRRA UDAŁO SIĘ</h3>
     </div>
   ) : null;
@@ -47,12 +54,13 @@ const RecipePage = ({ loadedRecipes, fetchRecipe, match }) => {
 }
 
 RecipePage.propTypes = {
-  fetchRecipe: PropTypes.func
+  fetchRecipe: PropTypes.func,
+  loadedRecipes: PropTypes.object
 }
 
 export default connect(state => {
   return {
-    loadedRecipes: state.recipes.loadedRecipes
+    loadedRecipes: state.recipes.loadedRecipes,
   }
 }, {
   fetchRecipe

@@ -17,7 +17,7 @@ import {
 const initialState = {
   loadingState: null,
   recipeCards: [],
-  loadedRecipes: new Map()
+  loadedRecipes: {}
 }
 
 const recipesReducer = (state = initialState, action) => {
@@ -84,10 +84,10 @@ const recipesReducer = (state = initialState, action) => {
     }
     case RECIPE_GET_SUCCESS: {
       delete loadingStateCopy.RECIPE_GET_REQUEST;
-
+      state.loadedRecipes[action.payload._id] = action.payload;
       return {
         ...state,
-        loadedRecipes: state.loadedRecipes.set(action.payload._id, action.payload),
+        loadedRecipes: { ...state.loadedRecipes },
         loadingState: loadingStateCopy
       };
     }

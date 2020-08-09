@@ -1,20 +1,35 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
+import { IngredientsListForm } from './components';
+
 import { addRecipe } from '../../data/actions';
 
 
 const AdminPage = ({ addRecipe }) => {
   const [title, setTitle] = useState('');
+  const [ingredients, setIngredients] = useState(['fasola', 'ziemniaki', 'buraki']);
   const [content, setContent] = useState('');
   const [difficulty, setDifficulty] = useState('');
+
+  const handleAddIngredient = newIngredient => {
+    if (!newIngredient) return;
+
+    setIngredients([...ingredients, newIngredient]);
+  }
+
+  const handleRemoveIngredient = name => {
+    const remainingIngredients = ingredients.filter(ingredient => ingredient !== name);
+
+    setIngredients(remainingIngredients);
+  }
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (!title || !content || !difficulty) return;
+    if (!title || !content || !difficulty || ingredients.length === 0) return;
 
-    addRecipe({ title, content, difficulty });
+    addRecipe({ title, content, difficulty, ingredients });
   }
 
   return (
@@ -23,6 +38,13 @@ const AdminPage = ({ addRecipe }) => {
       <form onSubmit={handleFormSubmit}>
         <label for="title">Tytuł:</label><br />
         <input type="text" name="title" value={title} onChange={e => setTitle(e.target.value)}/><br />
+
+        <IngredientsListForm 
+          items={ingredients}
+          handleAddIngredient={handleAddIngredient}
+          handleRemoveIngredient={handleRemoveIngredient}
+        />
+
         <label for="title">Content:</label><br />
         <textarea name="content" value={content} onChange={e => setContent(e.target.value)} style={{ width: '600px', height: '300px'}}/><br />
         <label for="title">Difficulty:</label><br />

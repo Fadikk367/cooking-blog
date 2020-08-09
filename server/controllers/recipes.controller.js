@@ -32,12 +32,14 @@ exports.postRecipe = async (req, res, next) => {
   const {
     title,
     content,
-    difficulty
+    difficulty,
+    ingredients
   } = req.body;
 
   try {
     const recipe = new Recipe({
       title,
+      ingredients,
       content,
       meta: {
         difficulty
