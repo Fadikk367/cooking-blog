@@ -4,6 +4,7 @@ import { COMMENTS_GET, COMMENT_ADD } from '../constants';
 
 export const fetchCommentsByRecipeId = recipeId => {
   const promise = axios.get(`${recipeId}/comments`);
+  console.log({ type: COMMENTS_GET, promise });
 
   return {
     promise,
@@ -11,7 +12,7 @@ export const fetchCommentsByRecipeId = recipeId => {
   };
 }
 
-export const addComment = (recipeId, author, content, parentCommentId = null) => {
+export const addComment = ({ recipeId, author, content, parentCommentId = null }) => {
   const promise = axios.post(`${recipeId}/comments`, {
     recipeId,
     author,

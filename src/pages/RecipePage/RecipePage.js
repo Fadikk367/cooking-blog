@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { RecipePageWrapper } from './RecipePage.css';
-import { CommentsSection } from './components';
+import { CommentsSection, AddCommentForm } from './components';
 
 import { fetchRecipe } from '../../data/actions';
 
@@ -14,11 +14,9 @@ const RecipePage = ({ loadedRecipes, fetchRecipe, match }) => {
   const recipeId = match.params.recipeId;
   const history = useHistory();
 
-  console.log(match);
-
   useEffect(() => {
     if (!!loadedRecipes[recipeId]) {
-      setRecipe(loadedRecipes[recipeId])
+      setRecipe(loadedRecipes[recipeId]);
     } else {
       fetchRecipe(recipeId);
     }
@@ -35,7 +33,7 @@ const RecipePage = ({ loadedRecipes, fetchRecipe, match }) => {
       <h2>{recipe.title}</h2>
       <ul>
         {recipe.ingredients.map(ingredient => (
-            <li>{ingredient}</li>
+            <li key={ingredient}>{ingredient}</li>
           )
         )}
       </ul>
@@ -51,7 +49,12 @@ const RecipePage = ({ loadedRecipes, fetchRecipe, match }) => {
         <button onClick={handleGoBackClick}>GO BACK!</button>
       </div>
       <hr />
-      <CommentsSection comments={comments}/>
+      {recipe ? (
+        <>
+          <CommentsSection commentIds={comments} recipeId={recipe._id}/>
+          <AddCommentForm recipeId={recipe._id}/>
+        </>
+      ) : null}
     </RecipePageWrapper>
   )
 }

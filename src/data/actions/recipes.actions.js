@@ -4,8 +4,6 @@ import { RECIPES_GET, RECIPES_ADD, RECIPE_GET } from '../constants';
 export const fetchRecipeCards = () => {
   const promise = axios.get('recipes');
 
-  console.log('recipes aciotn: ', promise);
-
   return {
     promise,
     type: RECIPES_GET

@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Comment } from './CommentsList.css';
 
+import { fetchCommentsByRecipeId } from '../../../../data/actions';
 
-const CommentsList = ({ comments = [] }) => {
 
-  console.log(comments);
+const CommentsList = ({ commentIds = [], commentsMap = {}, recipeId, fetchCommentsByRecipeId }) => {
+  const [comments, setComments] = useState({});
+  const [readyToRender, setReadyToRender] = useState(false);
+
+  useEffect(() => {
+    console.log(!commentsMap[recipeId]);
+    if (!commentsMap[recipeId]) {
+      console.log('calling fetch comments action');
+      fetchCommentsByRecipeId(recipeId);
+    } else {
+      setComments(commentsMap[recipeId]);
+      setReadyToRender(true);
+    }
+  }, [commentsMap, recipeId, fetchCommentsByRecipeId]);
+
   const renderedComments = [];
 
-  const renderComments = (renderedComments, comments, indenation = 0) => {
-    comments.forEach(comment => {
+  const renderComments = (renderedComments, commentIds, indenation = 0) => {
+    commentIds.forEach(commentId => {
+      const comment = comments[commentId];
+
       renderedComments.push((
         <Comment indenation={indenation}>
           <h3>{comment.author}</h3>
@@ -22,7 +39,13 @@ const CommentsList = ({ comments = [] }) => {
     });
   }
 
-  console.log(renderComments(renderedComments, comments));
+  console.log(commentIds);
+  console.log(comments);
+
+
+  const x = readyToRender ? renderComments(renderedComments, commentIds) : null;
+
+  // console.log(renderedComments);
 
   return (
     <div>
@@ -33,4 +56,7 @@ const CommentsList = ({ comments = [] }) => {
 }
 
 
-export default CommentsList;
+export default connect(
+  state => ({ commentsMap: state.comments.commentsByRecipeId }),
+  { fetchCommentsByRecipeId }
+)(CommentsList);

@@ -11,5 +11,9 @@ router.get('/:recipeId', recipesController.getFullRecipe);
 
 router.post('/', recipesController.postRecipe);
 
+router.get('/:recipeId/comments', recipesController.getAllCommentsByRecipeId);
+
+router.post('/:recipeId/comments', recipesController.addComment);
+
 
 module.exports = router;

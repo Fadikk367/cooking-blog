@@ -1,6 +1,6 @@
 export default () => next => action => {
   const { promise, type, ...rest } = action;
-
+  console.log({promise, type});
   if (!promise || typeof promise.then !== 'function') {
     return next(action);
   }
@@ -22,6 +22,7 @@ export default () => next => action => {
       });
     })
     .catch(error => {
+      console.log('promise middleware failure: ', error);
       next({ 
         type: FAILURE, 
         error, 
