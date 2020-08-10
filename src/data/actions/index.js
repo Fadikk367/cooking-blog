@@ -1,1 +1,2 @@
-export * from './recipes.action';
+export * from './recipes.actions';
+export * from './comments.actions';

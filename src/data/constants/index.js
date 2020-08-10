@@ -1,4 +1,5 @@
 export * from './recipes.constants';
+export * from './comments.constants';
 
 // LOADING STATES
 export const LOADING_STATES = {

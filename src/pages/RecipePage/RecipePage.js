@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { RecipePageWrapper } from './RecipePage.css';
+import { CommentsSection } from './components';
 
 import { fetchRecipe } from '../../data/actions';
 
@@ -27,6 +28,7 @@ const RecipePage = ({ loadedRecipes, fetchRecipe, match }) => {
     history.goBack();
   }
 
+  const comments = recipe ? recipe.comments : [];
 
   const renderedRecipe = recipe ? (
     <div>
@@ -38,7 +40,6 @@ const RecipePage = ({ loadedRecipes, fetchRecipe, match }) => {
         )}
       </ul>
       <p>{recipe.content}</p>
-      <h3>HURRRA UDAŁO SIĘ</h3>
     </div>
   ) : null;
 
@@ -49,6 +50,8 @@ const RecipePage = ({ loadedRecipes, fetchRecipe, match }) => {
       <div>
         <button onClick={handleGoBackClick}>GO BACK!</button>
       </div>
+      <hr />
+      <CommentsSection comments={comments}/>
     </RecipePageWrapper>
   )
 }
