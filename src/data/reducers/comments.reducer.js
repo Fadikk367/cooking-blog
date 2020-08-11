@@ -12,12 +12,12 @@ import {
 
 const initialState = {
   loadingState: null,
-  commentsByRecipeId: {}
+  comments: []
 }
 
 const commentsReducer = (state = initialState, action) => {
   const loadingStateCopy = { ...state.loadingState };
-  console.log('comments reducer, action.type: ', action.type);
+
   switch(action.type) {
     case COMMENTS_GET_REQUEST: {
       return {
@@ -30,16 +30,11 @@ const commentsReducer = (state = initialState, action) => {
     }
     case COMMENTS_GET_SUCCESS: {
       delete loadingStateCopy.COMMENTS_GET_REQUEST;
-      const recipeId = action.payload[0].recipeId;
-      state.commentsByRecipeId[recipeId] = {};
-      action.payload.forEach(comment => {
-        state.commentsByRecipeId[recipeId][comment._id] = comment;
-      });
 
       return {
         ...state,
         loadingState: loadingStateCopy,
-        commentsByRecipeId: { ...state.commentsByRecipeId }
+        comments: action.payload
       };
     }
     case COMMENTS_GET_FAILURE: {
@@ -60,23 +55,20 @@ const commentsReducer = (state = initialState, action) => {
     }
     case COMMENT_ADD_SUCCESS: {
       delete loadingStateCopy.COMMENT_ADD_REQUEST;
-
       const createdComment = action.payload.createdComment;
-      const recipeId = createdComment.recipeId;
-      state.commentsByRecipeId[recipeId][createdComment._id] = createdComment;
-      console.log(state);
 
-      return {
-        ...state,
-        loadingState: loadingStateCopy,
-        commentsByRecipeId: { 
-          ...state.commentsByRecipeId, 
-          [recipeId]: { 
-            ...state.commentsByRecipeId[recipeId],
-            [createdComment._id]: createdComment 
-          }
-        }
-      };
+      if (!createdComment.parentCommentId) {
+        return {
+          ...state,
+          loadingState: loadingStateCopy,
+          comments: [...state.comments, createdComment]
+        };
+      } else {
+        return {
+          ...state,
+          loadingState: loadingStateCopy,
+        };
+      }
     }
     case COMMENT_ADD_FAILURE: {
       delete loadingStateCopy.COMMENT_ADD_REQUEST;

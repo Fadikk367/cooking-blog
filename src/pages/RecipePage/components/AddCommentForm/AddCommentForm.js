@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Comment } from '../CommentsSection/CommentsList.css';
 
-import { addComment } from '../../../../data/actions';
+import { addComment } from 'data/actions';
+import { CommentFormContainer } from './AddCommentForm.css';
 
 
-const AddCommentForm = ({ addComment, recipeId, parentComemntId = null }) => {
+const AddCommentForm = ({ addComment, recipeId, parentCommentId = null }) => {
   const [author, setAuthor] = useState('');
   const [content, setContent] = useState('');
 
   const handleAddComment = (e) => {
     e.preventDefault();
-    console.log({ recipeId, author, content, parentComemntId });
-    addComment({ recipeId, author, content, parentComemntId });
+
+    addComment({ recipeId, author, content, parentCommentId });
   }
 
   return (
-    <Comment>
+    <CommentFormContainer>
       <form onSubmit={handleAddComment}>
-        <input type="text" value={author} placeholder="nickname" onChange={(e) => setAuthor(e.target.value)}/>
-        <textarea type="text" value={content} placeholder="comment..." onChange={(e) => setContent(e.target.value)}/>
-        <button type="submit">Submit</button>
+        <input type="text" value={author} name="author" placeholder="nickname" onChange={(e) => setAuthor(e.target.value)}/>
+        <textarea type="text" value={content} name="content" placeholder="comment..." onChange={(e) => setContent(e.target.value)}/>
+        <button type="submit">Dodaj</button>
       </form>
-    </Comment>
+    </CommentFormContainer>
   )
 }
 

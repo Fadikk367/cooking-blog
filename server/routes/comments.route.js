@@ -7,5 +7,7 @@ const router = Router();
 
 router.post('/', commentsController.createComment);
 
+router.get('/:parentId/answers', commentsController.getSubcommentsById);
+
 
 module.exports = router;

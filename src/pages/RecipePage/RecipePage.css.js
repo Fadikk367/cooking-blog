@@ -7,6 +7,4 @@ export const RecipePageWrapper = styled.main`
   max-width: 1024px;
   margin: auto;
   background: skyblue;
-  display: flex;
-  flex-direction: column;
 `;

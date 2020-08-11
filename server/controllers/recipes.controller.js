@@ -57,6 +57,9 @@ exports.postRecipe = async (req, res, next) => {
 exports.addComment = async (req, res, next) => {
   // const recipeId = req.query && req.query.recipeId;
   const recipeId = req.params.recipeId;
+  const parentCommentId = req.body.parentCommentId;
+  console.log({ parentCommentId, recipeId });
+
   if (!recipeId) {
     next(new Error('Recipe Id not specified!'));
   }
@@ -77,12 +80,22 @@ exports.addComment = async (req, res, next) => {
       content: req.body.content
     });
 
-    const createdComment = await comment.save({ session });
-
-    if (!req.body.parentCommentId) {
-      recipe.comments.push(createdComment._id);
+    if (!parentCommentId) {
+      recipe.comments.push(comment._id);
       await recipe.save({ session });
+    } else {
+      const parentComment = await Comment.findOne({ _id: parentCommentId }).session(session);
+
+      if (!parentComment) {
+        throw new Error('Comment with given Id does not exist');
+      }
+
+      comment.parentCommentId = parentComment._id;
+      parentComment.answers.push(comment._id);
+      await parentComment.save({ session });
     }
+
+    const createdComment = await comment.save({ session });
 
     await session.commitTransaction();
     session.endSession();
@@ -100,7 +113,7 @@ exports.getAllCommentsByRecipeId = async (req, res, next) => {
   }
 
   try {
-    const comments = await Comment.find({ recipeId: recipeId });
+    const comments = await Comment.find({ recipeId: recipeId, parentCommentId: null });
     res.json(comments);
   } catch(err) {
     next(err);

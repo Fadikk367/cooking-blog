@@ -1,1 +1,1 @@
-export { default } from './CommnetsList';
+export { default } from './CommnetsSection';

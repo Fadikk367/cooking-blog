@@ -36,3 +36,17 @@ exports.createComment = async (req, res, next) => {
     next(err);
   }
 }
+
+exports.getSubcommentsById = async (req, res, next) => {
+  const parentId = req.params.parentId;
+  if (!parentId) {
+    next(new Error('Comment with such Id does not exist!'));
+  }
+
+  try {
+    const comments = await Comment.find({ parentCommentId: parentId });
+    res.json(comments);
+  } catch(err) {
+    next(err);
+  }
+}
