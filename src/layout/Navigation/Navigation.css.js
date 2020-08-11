@@ -10,6 +10,28 @@ export const NavContainer = styled.div`
   padding: 0 20px;
 `;
 
+export const NavSearchBar = styled.div`
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img.search-icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px 0 5px;
+  }
+
+  input[name=search] {
+    padding: 5px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+  }
+
+`;
+
+
 export const NavList = styled.ul`
   display: flex;
   list-style-type: none;

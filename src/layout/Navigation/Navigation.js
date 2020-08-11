@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { NavContainer,  NavList, NavLink } from './Navigation.css';
+import { NavContainer, NavSearchBar, NavList, NavLink } from './Navigation.css';
+
+import searchImg from 'svgs/search.svg';
 
 const Navigation = ({ items=[], rightElement }) => {
 
@@ -10,7 +12,10 @@ const Navigation = ({ items=[], rightElement }) => {
   ))
   return (
     <NavContainer>
-      Nawigacja
+      <NavSearchBar>
+        <img src={searchImg} alt="" className="search-icon"/>
+        <input type="text" name="search" placeholder="szukaj..."/>
+      </NavSearchBar>
       <NavList>
         {linkElements}
       </NavList>

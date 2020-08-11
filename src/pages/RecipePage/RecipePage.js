@@ -14,8 +14,8 @@ const RecipePage = ({ fetchRecipe, recipe, fetchCommentsByRecipeId, match, recip
   const recipeId = match.params.recipeId;
 
   const isLoaded = useMemo(() => {
-    return (Object.keys(recipe) !== 0  && recipesState && Object.keys(recipesState).length === 0 && Object.keys(commentsState).length === 0)
-  }, [recipesState, recipe, commentsState]);
+    return (recipesState && Object.keys(recipesState).length === 0 && Object.keys(commentsState).length === 0)
+  }, [recipesState, commentsState]);
 
   useEffect(() => {
     fetchRecipe(recipeId);
