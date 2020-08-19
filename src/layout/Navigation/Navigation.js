@@ -8,7 +8,9 @@ import searchImg from 'svgs/search.svg';
 const Navigation = ({ items=[], rightElement }) => {
 
   const linkElements = items.map(item => (
-    <NavLink key={item.id} to={item.to}>{item.text}</NavLink>
+    <NavLink key={item.id} to={item.to}>
+      <li>{item.text}</li>
+    </NavLink>
   ))
   return (
     <NavContainer>
