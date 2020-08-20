@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const NavContainer = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   height: 10vh;
   background: #b3b3b3;
   display: flex;

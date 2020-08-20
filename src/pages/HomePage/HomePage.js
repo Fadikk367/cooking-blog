@@ -5,14 +5,15 @@ import { connect } from 'react-redux';
 import { Grid, HomePageContainer, Link } from './HomePage.css';
 import RecipeCard from 'components/RecipeCard';
 
-import { fetchRecipeCards } from 'data/actions';
+import { fetchRecipeCards, fetchRecipeTitles } from 'data/actions';
 
 
-const HomePage = ({ recipes, fetchRecipeCards, recipesState }) => {
+const HomePage = ({ recipes, fetchRecipeCards, recipesState, fetchRecipeTitles }) => {
 
   useEffect(() => {
     fetchRecipeCards();
-  }, [fetchRecipeCards]);
+    fetchRecipeTitles();
+  }, [fetchRecipeCards, fetchRecipeTitles]);
 
   const isLoaded = useMemo(() => {
     return (recipesState && Object.keys(recipesState) === 0)
@@ -54,5 +55,6 @@ export default connect(state => {
     recipesState: state.recipes.loadingState
   }
 }, {
-  fetchRecipeCards
+  fetchRecipeCards,
+  fetchRecipeTitles
 })(HomePage);

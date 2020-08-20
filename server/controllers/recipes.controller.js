@@ -119,3 +119,13 @@ exports.getAllCommentsByRecipeId = async (req, res, next) => {
     next(err);
   }
 }
+
+
+exports.getAllRecipeTitles = async (req, res ,next) => {
+  try {
+    const recipeTitles = await Recipe.find({}, { title: 1 });
+    res.json(recipeTitles);
+  } catch(err) {
+    next(err);
+  }
+}

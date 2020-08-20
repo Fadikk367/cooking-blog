@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -16,6 +16,33 @@ const navigationItems = [
 ]
 
 const App = () => {
+  const sidebarRef = useRef(null);
+  // const [sidebarPos, setSidebarPos] = useState(281);
+  // const [isSideberSticked, setIsSideberSticked] = useState(false);
+
+  // const handleWindowScroll = () => {
+  //   const offsetY = window.pageYOffset;
+  //   console.log({ offsetY, sidebarPos, isSideberSticked });
+  //   if (offsetY >= sidebarPos && !isSideberSticked) {
+      
+  //     setIsSideberSticked(prev => !prev);
+  //     sidebarRef.current.style.position = 'fixed';
+  //     sidebarRef.current.style.top = '0';
+  //     sidebarRef.current.style.right = '0';
+  //     sidebarRef.current.style.height = '100vh';
+  //   } else if (offsetY < sidebarPos && !isSideberSticked) {
+  //     setIsSideberSticked(prev => !prev);
+  //     sidebarRef.current.style.position = 'static';
+  //     sidebarRef.current.style.height = '70vh';
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleWindowScroll);
+
+  //   setSidebarPos(sidebarRef.current.offsetTop);
+  // }, [sidebarRef])
+
   return (
     <>
       <GlobalStyles />
@@ -27,7 +54,7 @@ const App = () => {
           <Route path="*"> 
             <Main>
               <Page />
-              <Sidebar />
+              <Sidebar sidebarRef={sidebarRef}/>
             </Main>
           </Route>
         </Switch>

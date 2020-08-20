@@ -9,6 +9,7 @@ export default () => next => action => {
   const FAILURE = `${type}_FAILURE`;
   const REQUEST = `${type}_REQUEST`;
 
+
   next({ type: REQUEST, ...rest });
 
   return promise
