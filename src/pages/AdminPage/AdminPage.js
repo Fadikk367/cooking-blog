@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { IngredientsListForm } from './components';
+import { IngredientsListForm, ParagraphController, PhotoController } from './components';
 
 import { addRecipe } from '../../data/actions';
 
@@ -49,6 +49,10 @@ const AdminPage = ({ addRecipe }) => {
         <textarea name="content" value={content} onChange={e => setContent(e.target.value)} style={{ width: '600px', height: '300px'}}/><br />
         <label for="title">Difficulty:</label><br />
         <input type="text" name="difficulty" value={difficulty} onChange={e => setDifficulty(e.target.value)}/><br />
+        <ParagraphController /><br/>
+        <PhotoController />
+        <ParagraphController /><br/>
+        <ParagraphController /><br/>
         <button type="submit">SUBMIT</button><br />
       </form>
     </div>
