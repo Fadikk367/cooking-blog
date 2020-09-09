@@ -9,6 +9,8 @@ import {
   ButtonIcon
 } from './ParagraphController.css';
 
+import { updateRecipeElement } from '../../../../data/actions/admin.actions';
+
 import deleteIcon from '../../../../svgs/bin.svg'
 import arrowUp from '../../../../svgs/arrow-up.svg'
 import arrowDown from '../../../../svgs/arrow-down.svg'
@@ -35,7 +37,7 @@ const ParagraphController = () => {
     console.log('mouse leave...');
   }
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = (e) => {
     setIsHovered(true);
     inputRef.current.style.height = `${divRef.current.offsetHeight}px`;
     console.log('mouse enter...');
@@ -66,6 +68,7 @@ const ParagraphController = () => {
           value={content} 
           onChange={e => setContent(e.target.value)}
           onInput={handleTextareaResize}
+          onBlur={() => console.log('save paragraphhhh...')}
           ref={inputRef}
           style={isHovered ? {display: 'block'} : {display: 'none'}}
         />

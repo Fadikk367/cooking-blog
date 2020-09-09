@@ -5,12 +5,15 @@ import {
   ControllerContent,
   Controls,
   ControlButton,
-  ButtonIcon
+  ButtonIcon,
+  ImagePreview,
+  DropZone
  } from './PhotoController.css';
 
  import deleteIcon from '../../../../svgs/bin.svg'
 import arrowUp from '../../../../svgs/arrow-up.svg'
 import arrowDown from '../../../../svgs/arrow-down.svg'
+import imageIcon from '../../../../svgs/image.svg'
 
 const PhotoController = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -29,7 +32,6 @@ const PhotoController = () => {
   const handleFileSelect = e => {
     console.log(e.target.files)
     if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(null);
       return;
     }
 
@@ -44,8 +46,13 @@ const PhotoController = () => {
         <ControlButton><ButtonIcon src={deleteIcon}/></ControlButton>
       </Controls>
       <ControllerContent>
-        <input type="file" onChange={handleFileSelect}/>
-        {selectedFile ? <img src={preview} alt="delected file"/> : null}
+        <DropZone for="file-input" isHidden={!!selectedFile}>
+          <img src={imageIcon} alt=""/>
+          <h2>Wybierz zdjecie</h2>
+          <h3>Przecignij i upuść lub kliknij i wybierz</h3>
+          <input type="file" onChange={handleFileSelect} id='file-input'/>
+        </DropZone>
+        {selectedFile ? <ImagePreview src={preview} alt="delected file"/> : null}
       </ControllerContent>
     </ControllerWrapper>
   )
