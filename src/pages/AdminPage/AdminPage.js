@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { IngredientsListForm, ParagraphController, PhotoController } from './components';
 
-import { createRecipeElement } from '../../../../data/actions/admin.actions';
+import { createRecipeElement } from '../../data/actions/admin.actions';
 import { addRecipe } from '../../data/actions';
 import { Element } from '../../utils/elementTypes';
 

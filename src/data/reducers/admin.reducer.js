@@ -27,6 +27,8 @@ export const adminReducer = (state = initialState, action) => {
   }
 }
 
+export default adminReducer;
+
 
 const createRecipeElement = (state, action) => {
   const elementType = action.payload.elementType;
