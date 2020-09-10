@@ -1,7 +1,8 @@
-import { CREATE_ELEMENT, UPDATE_ELEMENT } from '../constants/admin.constants';
+import { CREATE_ELEMENT, UPDATE_ELEMENT, DELETE_ELEMENT } from '../constants/admin.constants';
 import { Element } from '../../utils/elementTypes';
+import { deleteRecipeElementData } from '../actions/admin.actions';
 
-const idGenerator = elementIdGenerator();
+// const idGenerator = elementIdGenerator();
 
 const initialState = {
   auth: {
@@ -22,6 +23,9 @@ export const adminReducer = (state = initialState, action) => {
     case UPDATE_ELEMENT: {
       return updateRecipeElement(state, action);
     }
+    case DELETE_ELEMENT: {
+      return deleteRecipeElement(state, action);
+    }
     default:
       return state;
   }
@@ -33,7 +37,6 @@ export default adminReducer;
 const createRecipeElement = (state, action) => {
   const elementType = action.payload.elementType;
   let newRecipeElement;
-  let idPrefix = ''
 
   switch (elementType) {
     case Element.PHOTO:
@@ -41,20 +44,25 @@ const createRecipeElement = (state, action) => {
         type: Element.PHOTO,
         photo: null,
       };
-      idPrefix = 'img';
       break;
     case Element.PARAGRAPH:
       newRecipeElement = {
         type: Element.PARAGRAPH,
         text: '',
       }
-      idPrefix = 'p'
+      break;
+    case Element.LIST:
+      newRecipeElement = {
+        type: Element.LIST,
+        title: '',
+        items: [],
+      }
       break;
     default:
       return state;
   }
 
-  const elementId = generateRecipeElementId(idPrefix);
+  const elementId = action.payload.elementId;
 
   return {
     ...state,
@@ -74,10 +82,17 @@ const updateRecipeElement = (state, action) => {
 
   switch (elementToUpdate.type) {
     case Element.PHOTO:
+      if (elementToUpdate.photo)
+        URL.revokeObjectURL(elementToUpdate.photo);
       elementToUpdate.photo = action.payload.update;
       break;
     case Element.PARAGRAPH:
       elementToUpdate.text = action.payload.update;
+      break;
+
+    case Element.LIST:
+      elementToUpdate.title = action.payload.update.title;
+      elementToUpdate.items = action.payload.update.items;
       break;
     default:
       return state;
@@ -92,13 +107,28 @@ const updateRecipeElement = (state, action) => {
   }
 }
 
-const generateRecipeElementId = (idPrefix) => {
-  return `${idPrefix}-${idGenerator.next().value}`;
-}
 
-function* elementIdGenerator() {
-  let id = 0;
-  while (true) {
-    yield id++;
+const deleteRecipeElement = (state, action) => {
+  const { elementId } = action.payload;
+
+  delete state.recipe.elements[elementId];
+
+  return {
+    ...state,
+    recipe: {
+      ...state.recipe,
+      elements: { ...state.recipe.elements }
+    }
   }
 }
+
+// const generateRecipeElementId = (idPrefix) => {
+//   return `${idPrefix}-${idGenerator.next().value}`;
+// }
+
+// function* elementIdGenerator() {
+//   let id = 0;
+//   while (true) {
+//     yield id++;
+//   }
+// }

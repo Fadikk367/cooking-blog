@@ -1,21 +1,31 @@
-import { CREATE_ELEMENT, UPDATE_ELEMENT } from '../constants/admin.constants';
+import { CREATE_ELEMENT, UPDATE_ELEMENT, DELETE_ELEMENT } from '../constants/admin.constants';
 
 
-export const createRecipeElement = elementType => {
+export const createRecipeElementData = (elementType, elementId) => {
   return {
     type: CREATE_ELEMENT,
     payload: {
       elementType,
+      elementId,
     }
   }
 }
 
-export const updateRecipeElement = (elementId, update) => {
+export const updateRecipeElementData = (elementId, update) => {
   return {
     type: UPDATE_ELEMENT,
     payload: {
       elementId,
       update,
+    }
+  }
+}
+
+export const deleteRecipeElementData = elementId => {
+  return {
+    type: DELETE_ELEMENT,
+    payload: {
+      elementId,
     }
   }
 }
