@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
 import { 
   ControllerWrapper,
@@ -10,12 +11,14 @@ import {
   DropZone
  } from './PhotoController.css';
 
+import { updateRecipeElementData } from '../../../../data/actions/admin.actions';
+
  import deleteIcon from '../../../../svgs/bin.svg'
 import arrowUp from '../../../../svgs/arrow-up.svg'
 import arrowDown from '../../../../svgs/arrow-down.svg'
 import imageIcon from '../../../../svgs/image.svg'
 
-const PhotoController = () => {
+const PhotoController = ({ updateRecipeElementData, id, handleDeleteElement }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
 
@@ -27,7 +30,8 @@ const PhotoController = () => {
 
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreview(objectUrl);
-  }, [selectedFile]);
+    updateRecipeElementData(id, objectUrl);
+  }, [selectedFile, updateRecipeElementData, id]);
 
   const handleFileSelect = e => {
     console.log(e.target.files)
@@ -43,9 +47,9 @@ const PhotoController = () => {
       <Controls>
         <ControlButton><ButtonIcon src={arrowUp}/></ControlButton>
         <ControlButton><ButtonIcon src={arrowDown}/></ControlButton>
-        <ControlButton><ButtonIcon src={deleteIcon}/></ControlButton>
+        <ControlButton onClick={() => handleDeleteElement(id)}><ButtonIcon src={deleteIcon}/></ControlButton>
       </Controls>
-      <ControllerContent>
+      <ControllerContent className="content">
         <DropZone for="file-input" isHidden={!!selectedFile}>
           <img src={imageIcon} alt=""/>
           <h2>Wybierz zdjecie</h2>
@@ -59,4 +63,4 @@ const PhotoController = () => {
 }
 
 
-export default PhotoController;
+export default connect(null , { updateRecipeElementData })(PhotoController);

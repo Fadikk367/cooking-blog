@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { connect } from 'react-redux';
 
 import { 
   ControllerWrapper,
@@ -9,7 +10,7 @@ import {
   ButtonIcon
 } from './ParagraphController.css';
 
-import { updateRecipeElement } from '../../../../data/actions/admin.actions';
+import { updateRecipeElementData } from '../../../../data/actions/admin.actions';
 
 import deleteIcon from '../../../../svgs/bin.svg'
 import arrowUp from '../../../../svgs/arrow-up.svg'
@@ -17,13 +18,24 @@ import arrowDown from '../../../../svgs/arrow-down.svg'
 
 const lorem = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nihil laborum ratione inventore, tempora assumenda autem voluptatum doloremque provident culpa est laudantium necessitatibus dolorum eos! Esse architecto, veniam odit dicta molestias a accusantium? Et voluptate minima commodi asperiores illum quae repellendus officia neque. Necessitatibus quas fuga, perspiciatis quia esse qui.'
 
-const ParagraphController = () => {
+const ParagraphController = ({ handleDeleteElement, id, updateRecipeElementData }) => {
   const [isBeingEdit, setIsBeingEdit] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [content, setContent] = useState(lorem);
   const inputRef = useRef(null);
   const divRef = useRef(null);
 
+  const handleMoveElementUp = () => {
+    console.log(`Move element: ${id} up`);
+  }
+
+  const handleMoveElementDown = () => {
+    console.log(`Move element: ${id} down`);
+  }
+
+  const handleElementUpdate = id => {
+    updateRecipeElementData(id, content);
+  }
 
   const handleControllerClick = () => {
     setIsBeingEdit(true);
@@ -57,9 +69,9 @@ const ParagraphController = () => {
       onClick={handleControllerClick}
     >
       <Controls isDisplayed={isHovered || isBeingEdit}>
-        <ControlButton><ButtonIcon src={arrowUp}/></ControlButton>
-        <ControlButton><ButtonIcon src={arrowDown}/></ControlButton>
-        <ControlButton><ButtonIcon src={deleteIcon}/></ControlButton>
+        <ControlButton onClick={handleMoveElementUp}><ButtonIcon src={arrowUp}/></ControlButton>
+        <ControlButton onClick={handleMoveElementDown}><ButtonIcon src={arrowDown}/></ControlButton>
+        <ControlButton onClick={() => handleDeleteElement(id)}><ButtonIcon src={deleteIcon}/></ControlButton>
       </Controls>
       <ControllerContent className="content">
         <textarea 
@@ -68,7 +80,7 @@ const ParagraphController = () => {
           value={content} 
           onChange={e => setContent(e.target.value)}
           onInput={handleTextareaResize}
-          onBlur={() => console.log('save paragraphhhh...')}
+          onBlur={() => handleElementUpdate(id)}
           ref={inputRef}
           style={isHovered ? {display: 'block'} : {display: 'none'}}
         />
@@ -89,4 +101,4 @@ const ParagraphController = () => {
   )
 }
 
-export default ParagraphController;
+export default connect(null, { updateRecipeElementData })(ParagraphController);

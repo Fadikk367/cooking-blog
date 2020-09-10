@@ -71,6 +71,11 @@ export const ControlButton = styled.div`
   border-radius: 7px;
   background: lightgray;
   margin-left: 7px;
+  cursor: pointer;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const ControllerContent = styled.div`

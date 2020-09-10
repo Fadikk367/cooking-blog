@@ -1,19 +1,17 @@
 import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 
-import { IngredientsListForm, ParagraphController, PhotoController } from './components';
+import { IngredientsListForm, ParagraphController, PhotoController, ListController } from './components';
+import { AdminPageWrapper, SubmitButton } from './AdminPage.css';
 
-import { createRecipeElement } from '../../data/actions/admin.actions';
+import { createRecipeElementData, deleteRecipeElementData } from '../../data/actions/admin.actions';
 import { addRecipe } from '../../data/actions';
 import { Element } from '../../utils/elementTypes';
 
 
-const AdminPage = ({ addRecipe }) => {
+const AdminPage = ({ addRecipe, createRecipeElementData, deleteRecipeElementData }) => {
   const [title, setTitle] = useState('');
-  const [ingredients, setIngredients] = useState(['fasola', 'ziemniaki', 'buraki']);
-  const [content, setContent] = useState('');
-  const [difficulty, setDifficulty] = useState('');
-
+  const [elementCount, setElementCount] = useState(0);
   const [metaInfo, setMetaInfo] = useState({});
   const [recipeElements, setRecipeElements] = useState([]);
 
@@ -24,66 +22,59 @@ const AdminPage = ({ addRecipe }) => {
   const createRecipeElement = (type, index = recipeElements.length) => {
     switch(type) {
       case Element.PARAGRAPH: {
-        const paragraph = <ParagraphController lp={index}/>
+        const elementId = `p-${elementCount}`
+        const paragraph = <ParagraphController key={elementId} id={elementId} handleDeleteElement={handleDeleteRecipeElement}/>
+        createRecipeElementData(Element.PARAGRAPH, elementId);
         setRecipeElements([...recipeElements, paragraph]);
         break;
       }
       case Element.PHOTO: {
-        const photo = <PhotoController lp={index}/>
+        const elementId = `img-${elementCount}`;
+        const photo = <PhotoController key={elementId} id={elementId} handleDeleteElement={handleDeleteRecipeElement}/>
+        createRecipeElementData(Element.PHOTO, elementId);
         setRecipeElements([...recipeElements, photo]);
+        break;
+      }
+      case Element.LIST: {
+        const elementId = `ul-${elementCount}`;
+        const list = <ListController key={elementId} id={elementId} handleDeleteElement={handleDeleteRecipeElement}/>
+        createRecipeElementData(Element.LIST, elementId);
+        setRecipeElements([...recipeElements, list]);
         break;
       }
       default:
         return;
     }
+    setElementCount(prev => prev + 1);
   }
 
-  const handleAddIngredient = newIngredient => {
-    if (!newIngredient) return;
-
-    setIngredients([...ingredients, newIngredient]);
+  const handleDeleteRecipeElement = (id) => {
+    console.log(`REMOVE element: ${id}`);
+    const newRecipeELements = recipeElements.filter(element => element.props.id !== id);
+    setRecipeElements(newRecipeELements);
+    deleteRecipeElementData(id);
   }
 
-  const handleRemoveIngredient = name => {
-    const remainingIngredients = ingredients.filter(ingredient => ingredient !== name);
-
-    setIngredients(remainingIngredients);
-  }
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
-    if (!title || !content || !difficulty || ingredients.length === 0) return;
-
-    addRecipe({ title, content, difficulty, ingredients });
+    console.log('dodaj przepis...')
   }
 
   return (
-    <div>
+    <AdminPageWrapper>
       <h1>Admin Page</h1>
+      <button onClick={() => createRecipeElement(Element.PARAGRAPH)}>add paragraph</button>
+      <button onClick={() => createRecipeElement(Element.PHOTO)}>add photo</button>
+      <button onClick={() => createRecipeElement(Element.LIST)}>add list</button>
       <form onSubmit={handleFormSubmit}>
         <label for="title">Tytuł:</label><br />
         <input type="text" name="title" value={title} onChange={e => setTitle(e.target.value)}/><br />
-
-        <IngredientsListForm 
-          items={ingredients}
-          handleAddIngredient={handleAddIngredient}
-          handleRemoveIngredient={handleRemoveIngredient}
-        />
-
-        <label for="title">Content:</label><br />
-        <textarea name="content" value={content} onChange={e => setContent(e.target.value)} style={{ width: '600px', height: '300px'}}/><br />
-        <label for="title">Difficulty:</label><br />
-        <input type="text" name="difficulty" value={difficulty} onChange={e => setDifficulty(e.target.value)}/><br />
-        <ParagraphController /><br/>
-        <PhotoController />
-        <ParagraphController /><br/>
-        <PhotoController />
-        <ParagraphController /><br/>
-        <button type="submit">SUBMIT</button><br />
+        {recipeElements}
+        <SubmitButton type="submit">OPUBLIKUJ PRZEPIS</SubmitButton><br />
       </form>
-    </div>
+    </AdminPageWrapper>
   )
 }
 
-export default connect(null, { addRecipe })(AdminPage);
+export default connect(null, { addRecipe, createRecipeElementData, deleteRecipeElementData })(AdminPage);
