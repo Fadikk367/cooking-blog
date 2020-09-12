@@ -1,6 +1,7 @@
 const { Router } = require('express');
 
 const { recipesController } = require('../controllers');
+const upload = require('../middlewares/upload');
 
 const router = Router();
 
@@ -11,7 +12,7 @@ router.get('/titles', recipesController.getAllRecipeTitles);
 
 router.get('/:recipeId', recipesController.getFullRecipe);
 
-router.post('/', recipesController.postRecipe);
+router.post('/', upload.array('photos'), recipesController.postRecipe);
 
 router.get('/:recipeId/comments', recipesController.getAllCommentsByRecipeId);
 

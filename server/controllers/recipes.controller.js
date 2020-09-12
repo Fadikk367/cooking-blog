@@ -1,5 +1,6 @@
 const { Recipe, Comment } = require('../models');
 const mongoose = require('mongoose');
+const { element } = require('prop-types');
 
 exports.getAllRecipes = async (req, res, next) => {
   const { count, blocks } = req.query;
@@ -36,12 +37,25 @@ exports.postRecipe = async (req, res, next) => {
     difficulty,
     ingredients
   } = req.body;
+  const photos = req.files;
+  console.log({ photos });
+  const elements =  JSON.parse(req.body.elements);
+  for (let element of elements) {
+    if (element.type === 'PHOTO') {
+      const correspondingPhoto = photos.find(photo => photo.originalname === element.photoName);
+      if (!!correspondingPhoto)
+        element.photo = correspondingPhoto.location
+      else console.log('photo not found');
+    }
+  }
+  console.log(elements);
 
   try {
     const recipe = new Recipe({
       title,
       ingredients,
       content,
+      elements,
       meta: {
         difficulty
       }

@@ -3,20 +3,21 @@ const mongoose = require('mongoose');
 const RecipeSchema = mongoose.Schema({
   title: {
     type: String,
-    required: true
   },
-  ingredients: {
-    type: [String],
-    required: true
-  },
-  content: {
+  description: {
     type: String,
-    required: true
   },
   date: {
     type: Date,
     default: Date.now
   },
+  ingredients: {
+    type: [String],
+  },
+  content: {
+    type: String,
+  },
+  elements: [{}],
   comments: {
     type: [{ type: mongoose.Types.ObjectId, ref: 'Comment' }],
     default: []
@@ -27,10 +28,14 @@ const RecipeSchema = mongoose.Schema({
       difficulty: {
         type: String,
         enum: ['easy', 'medium', 'advanced'],
-        required: true
-      }
-    }
-  }
+      },
+      tags: {
+        type: [String],
+        default: [],
+        enum: ['vege', 'fit', 'natural', 'meat', 'diary', 'salad', 'vegetables']
+      },
+    },
+  },
 });
 
 module.exports = mongoose.model('Recipe', RecipeSchema);
