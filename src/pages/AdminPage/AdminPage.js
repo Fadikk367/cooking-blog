@@ -1,7 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 
-import { IngredientsListForm, ParagraphController, PhotoController, ListController } from './components';
+import { 
+  ParagraphController, 
+  PhotoController, 
+  ListController,
+  SubmitRecipeForm,
+} from './components';
 import { AdminPageWrapper, SubmitButton } from './AdminPage.css';
 
 import { createRecipeElementData, deleteRecipeElementData } from '../../data/actions/admin.actions';
@@ -50,7 +55,9 @@ const AdminPage = ({ addRecipe, createRecipeElementData, deleteRecipeElementData
 
   const handleDeleteRecipeElement = (id) => {
     console.log(`REMOVE element: ${id}`);
+    console.log({ recipeElements });
     const newRecipeELements = recipeElements.filter(element => element.props.id !== id);
+    console.log({ newRecipeELements });
     setRecipeElements(newRecipeELements);
     deleteRecipeElementData(id);
   }
@@ -71,7 +78,7 @@ const AdminPage = ({ addRecipe, createRecipeElementData, deleteRecipeElementData
         <label for="title">Tytuł:</label><br />
         <input type="text" name="title" value={title} onChange={e => setTitle(e.target.value)}/><br />
         {recipeElements}
-        <SubmitButton type="submit">OPUBLIKUJ PRZEPIS</SubmitButton><br />
+        <SubmitRecipeForm />
       </form>
     </AdminPageWrapper>
   )

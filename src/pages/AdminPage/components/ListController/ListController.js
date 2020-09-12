@@ -29,17 +29,6 @@ const ListController = ({ updateRecipeElementData, id, handleDeleteElement }) =>
     updateRecipeElementData(id, update);
   }
 
-  const handleDeleteItem = (itemName) => {
-    const newItems = listItems.filter(item => item !== itemName);
-    const update = {
-      title: listTitle,
-      items: newItems
-    };
-
-    setListItems(newItems);
-    updateRecipeElementData(id, update);
-  };
-
   const handleAddItem = () => {
     if (currentItem) {
       const newItems = [...listItems, currentItem];
@@ -55,10 +44,21 @@ const ListController = ({ updateRecipeElementData, id, handleDeleteElement }) =>
   }
 
   const renderedListItems = useMemo(() => {
+    const handleDeleteItem = (itemName) => {
+      const newItems = listItems.filter(item => item !== itemName);
+      const update = {
+        title: listTitle,
+        items: newItems
+      };
+  
+      setListItems(newItems);
+      updateRecipeElementData(id, update);
+    };
+
     return listItems.map(item => (
       <ListItem key={item}>{item}<button onClick={() => handleDeleteItem(item)}>x</button></ListItem>
     ))
-  }, [listItems]);
+  }, [listItems, setListItems, updateRecipeElementData, id, listTitle]);
 
 
   return (

@@ -51,7 +51,8 @@ const ParagraphController = ({ handleDeleteElement, id, updateRecipeElementData 
 
   const handleMouseEnter = (e) => {
     setIsHovered(true);
-    inputRef.current.style.height = `${divRef.current.offsetHeight}px`;
+    inputRef.current.style.height = `${divRef.current.offsetHeight - 10}px`;
+    // divRef.current.style.height = `${inputRef.current.offsetHeight}px`;
     console.log('mouse enter...');
   }
 

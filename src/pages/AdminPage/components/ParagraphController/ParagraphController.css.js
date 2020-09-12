@@ -99,6 +99,7 @@ export const ControllerContent = styled.div`
   }
 
   textarea {
+    resize: none;
     font-size: 1.2em;
     background: lightgray;
     border-radius: 7px;
