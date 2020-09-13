@@ -4,9 +4,9 @@ const multer = require('multer');
 const path = require('path');
 
 const s3 = new aws.S3({
-  accessKeyId: 'AKIAWNXPIC2KFHS2QYEV',
-  secretAccessKey: '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',
-  Bucket: 'fadikktestbucket'
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  Bucket: process.env.AWS_BUCKET_NAME,
 });
 
 
