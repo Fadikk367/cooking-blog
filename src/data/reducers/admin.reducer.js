@@ -1,6 +1,5 @@
-import { CREATE_ELEMENT, UPDATE_ELEMENT, DELETE_ELEMENT } from '../constants/admin.constants';
+import { CREATE_ELEMENT, UPDATE_ELEMENT, DELETE_ELEMENT, MOVE_ELEMENT } from '../constants/admin.constants';
 import { Element } from '../../utils/elementTypes';
-import { deleteRecipeElementData } from '../actions/admin.actions';
 
 // const idGenerator = elementIdGenerator();
 
@@ -17,15 +16,14 @@ const initialState = {
 
 export const adminReducer = (state = initialState, action) => {
   switch(action.type) {
-    case CREATE_ELEMENT: {
+    case CREATE_ELEMENT: 
       return createRecipeElement(state, action);
-    }
-    case UPDATE_ELEMENT: {
+    case UPDATE_ELEMENT: 
       return updateRecipeElement(state, action);
-    }
-    case DELETE_ELEMENT: {
+    case DELETE_ELEMENT: 
       return deleteRecipeElement(state, action);
-    }
+    case MOVE_ELEMENT:
+      return swapRecipeElements(state, action);
     default:
       return state;
   }
@@ -35,7 +33,7 @@ export default adminReducer;
 
 
 const createRecipeElement = (state, action) => {
-  const elementType = action.payload.elementType;
+  const { elementType, index } = action.payload;
   let newRecipeElement;
 
   switch (elementType) {
@@ -43,12 +41,14 @@ const createRecipeElement = (state, action) => {
       newRecipeElement = {
         type: Element.PHOTO,
         photo: null,
+        index,
       };
       break;
     case Element.PARAGRAPH:
       newRecipeElement = {
         type: Element.PARAGRAPH,
         text: '',
+        index,
       }
       break;
     case Element.LIST:
@@ -56,6 +56,14 @@ const createRecipeElement = (state, action) => {
         type: Element.LIST,
         title: '',
         items: [],
+        index,
+      }
+      break;
+    case Element.HEADER:
+      newRecipeElement = {
+        type: Element.HEADER,
+        text: '',
+        index,
       }
       break;
     default:
@@ -88,8 +96,10 @@ const updateRecipeElement = (state, action) => {
       break;
     case Element.PARAGRAPH:
       elementToUpdate.text = action.payload.update;
+      break;    
+    case Element.HEADER:
+      elementToUpdate.text = action.payload.update;
       break;
-
     case Element.LIST:
       elementToUpdate.title = action.payload.update.title;
       elementToUpdate.items = action.payload.update.items;
@@ -110,8 +120,11 @@ const updateRecipeElement = (state, action) => {
 
 const deleteRecipeElement = (state, action) => {
   const { elementId } = action.payload;
-
+  const deletedElementIndex = state.recipe.elements[elementId].index;
   delete state.recipe.elements[elementId];
+
+  const elementsToDecrementIndex = Object.values(state.recipe.elements).filter(element => element.index > deletedElementIndex);
+  elementsToDecrementIndex.forEach(element => element.index--);
 
   return {
     ...state,
@@ -122,13 +135,24 @@ const deleteRecipeElement = (state, action) => {
   }
 }
 
-// const generateRecipeElementId = (idPrefix) => {
-//   return `${idPrefix}-${idGenerator.next().value}`;
-// }
+const swapRecipeElements = (state, action) => {
+  const { elementId, indexOffset } = action.payload;
+  console.log({ elementId, indexOffset });
 
-// function* elementIdGenerator() {
-//   let id = 0;
-//   while (true) {
-//     yield id++;
-//   }
-// }
+  const newElementIndex = state.recipe.elements[elementId].index + indexOffset;
+
+  const elementBeingMoved = state.recipe.elements[elementId];
+  const tmp = Object.values(state.recipe.elements).find(element => element.index === newElementIndex);
+  if (!tmp) return state;
+
+  tmp.index = elementBeingMoved.index;
+  elementBeingMoved.index = newElementIndex;
+
+  return {
+    ...state,
+    recipe: {
+      ...state.recipe,
+      elements: { ...state.recipe.elements }
+    }
+  }
+}

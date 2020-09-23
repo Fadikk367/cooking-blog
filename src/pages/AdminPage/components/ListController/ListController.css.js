@@ -1,35 +1,5 @@
 import styled from 'styled-components';
 
-export const ListControllerWrapper = styled.div`
-  position: relative;
-  height: 100%;
-  width: 100%;
-  border: 2px dashed transparent;
-  transition: all 0.4s ease-in-out;
-  box-sizing: border-box;
-
-  .content {
-    transform: translateY(0);
-    transition: transform 0.4s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  &:hover {
-    padding-bottom: 45px;
-    border: 2px dashed black;
-
-    & > div:first-child {
-      opacity: 1;
-    }
-
-    .content {
-      transform: translateY(45px);
-    }
-  }
-`;
 
 export const ListTitle = styled.input`
   outline: none;
@@ -100,42 +70,3 @@ export const ListItem = styled.li`
     }
   }
 `;
-
-
-
-
-
-
-export const Controls = styled.div`
-  position: absolute;
-  display: flex;
-  margin: 5px 0;
-  opacity: 0;
-  margin-right: 5px;
-  transition: all 0.4s ease-in-out;
-  width: calc(100% - 5px);
-  justify-content: flex-end;
-  align-items: center;
-`;
-
-export const ButtonIcon = styled.img`
-  width: 25px;
-  height: 25px;
-  display: inline-block;
-`;
-
-export const ControlButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  border-radius: 7px;
-  background: lightgray;
-  margin-left: 7px;
-  cursor: pointer;
-  
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-

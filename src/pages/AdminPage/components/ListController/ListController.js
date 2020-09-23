@@ -1,21 +1,16 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 
+import { ControllerWrapper, ElementControls } from 'components';
 import { 
-  ListControllerWrapper,
-  Controls,
-  ControlButton,
-  ButtonIcon,
   ListItem,
   ListTitle
 } from './ListController.css';
 
 import { updateRecipeElementData } from '../../../../data/actions/admin.actions';
-import deleteIcon from '../../../../svgs/bin.svg'
-import arrowUp from '../../../../svgs/arrow-up.svg'
-import arrowDown from '../../../../svgs/arrow-down.svg'
 
-const ListController = ({ updateRecipeElementData, id, handleDeleteElement }) => {
+
+const ListController = ({ id, updateRecipeElementData }) => {
   const [listTitle, setListTitle] = useState('');
   const [listItems, setListItems] = useState(['marchew', 'coconut', 'pomidor']);
   const [currentItem, setCurrentItem] = useState('');
@@ -62,20 +57,16 @@ const ListController = ({ updateRecipeElementData, id, handleDeleteElement }) =>
 
 
   return (
-    <ListControllerWrapper>
-      <Controls>
-        <ControlButton><ButtonIcon src={arrowUp}/></ControlButton>
-        <ControlButton><ButtonIcon src={arrowDown}/></ControlButton>
-        <ControlButton onClick={() => handleDeleteElement(id)}><ButtonIcon src={deleteIcon}/></ControlButton>
-      </Controls>
+    <ControllerWrapper>
+      <ElementControls id={id} />
       <div className="content">
-      <ListTitle 
-        type="text" 
-        value={listTitle} 
-        onChange={e => setListTitle(e.target.value)} 
-        placeholder='title...'
-        onBlur={() => handleElementUpdate(id)}
-      />
+        <ListTitle 
+          type="text" 
+          value={listTitle} 
+          onChange={e => setListTitle(e.target.value)} 
+          placeholder='list title...'
+          onBlur={() => handleElementUpdate(id)}
+        />
       <ul>
         {renderedListItems}
         <ListItem isInput={true}>
@@ -84,7 +75,7 @@ const ListController = ({ updateRecipeElementData, id, handleDeleteElement }) =>
         </ListItem>
       </ul>
       </div>
-    </ListControllerWrapper>
+    </ControllerWrapper>
   )
 }
 

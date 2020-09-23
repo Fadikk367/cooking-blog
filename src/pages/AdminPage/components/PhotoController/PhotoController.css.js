@@ -1,33 +1,6 @@
 import styled from 'styled-components';
 
 
-export const ControllerWrapper = styled.div`
-  position: relative;
-  height: 100%;
-  width: 100%;
-  border: 2px dashed transparent;
-  transition: all 0.4s ease-in-out;
-  box-sizing: border-box;
-
-  .content {
-    transition: all 0.4s ease-in-out;
-    transform: translateY(0);
-  }
-
-  &:hover {
-    padding-bottom: 45px;
-    border: 2px dashed black;
-
-    .content {
-      transform: translateY(45px);
-    }
-
-    & > div:first-child {
-      opacity: 1;
-    }
-  }
-`;
-
 export const ControllerContent = styled.div`
   position: relative;
   display: flex;
@@ -40,34 +13,6 @@ export const ControllerContent = styled.div`
   border-radius: 7px;
 `;
 
-
-export const Controls = styled.div`
-  position: absolute;
-  display: flex;
-  opacity: 0;
-  margin: 5px 0;
-  margin-right: 5px;
-  width: calc(100% - 5px);
-  justify-content: flex-end;
-  align-items: center;
-  transition: all 0.4s ease-in-out;
-`;
-
-export const ButtonIcon = styled.img`
-  width: 25px;
-  height: 25px;
-  display: inline-block;
-`;
-
-export const ControlButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  border-radius: 7px;
-  background: lightgray;
-  margin-left: 7px;
-`;
 
 export const ImagePreview = styled.img`
   width: 100%;
