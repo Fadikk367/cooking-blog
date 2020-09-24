@@ -32,6 +32,7 @@ const HeaderController = ({ id, updateRecipeElementData }) => {
       <HeaderInput 
         className="content"
         type="text"
+        placeholder="Your header..."
         value={content}
         ref={inputRef}
         onFocus={() => setIsBeingEdited(true)}
