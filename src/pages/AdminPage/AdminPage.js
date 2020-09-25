@@ -7,6 +7,7 @@ import {
   ListController,
   HeaderController,
   SubmitRecipeForm,
+  MetaInfoForm,
 } from './components';
 import { AdminPageWrapper } from './AdminPage.css';
 
@@ -59,6 +60,7 @@ const AdminPage = ({ deleteRecipeElementData, elements = [] }) => {
         <label for="title">Tytuł:</label><br />
         <input type="text" name="title" value={title} onChange={e => setTitle(e.target.value)}/><br />
         {renderedRecipeElements}
+        <MetaInfoForm />
         <SubmitRecipeForm />
       </form>
     </AdminPageWrapper>
