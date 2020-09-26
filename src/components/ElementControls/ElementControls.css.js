@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const ControlsContainer = styled.div`
   position: absolute;
+  top: 0;
   display: flex;
   margin: 5px 0;
   opacity: 0;
