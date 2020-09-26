@@ -1,4 +1,4 @@
-import { CREATE_ELEMENT, UPDATE_ELEMENT, DELETE_ELEMENT, POST_RECIPE, MOVE_ELEMENT } from '../constants/admin.constants';
+import { CREATE_ELEMENT, UPDATE_ELEMENT, DELETE_ELEMENT, POST_RECIPE, MOVE_ELEMENT, UPDATE_METADATA } from '../constants/admin.constants';
 import axios from 'axios';
 
 export const addRecipe = ({ title = 'tit', content = 'cont', difficulty = 'easy', ingredients = ['marchew'], photos, elements }) => {
@@ -56,12 +56,22 @@ export const deleteRecipeElementData = elementId => {
 }
 
 export const moveRecipeElementData = (elementId, indexOffset) => {
-  console.log({elementId, indexOffset});
   return {
     type: MOVE_ELEMENT,
     payload: {
       elementId,
       indexOffset,
+    }
+  }
+}
+
+
+export const updateRecipeMetadata = (metaKey, metaValue) => {
+  return {
+    type: UPDATE_METADATA,
+    payload: {
+      metaKey,
+      metaValue,
     }
   }
 }
