@@ -19,8 +19,10 @@ const SubmitRecipeForm = ({ recipe }) => {
     }));
 
     addRecipe({
-      photos: photoFiles,
+      title: recipe.title,
+      metadata: recipe.metadata,
       elements: Object.values(recipe.elements),
+      photos: photoFiles,
     })
   }
   return (

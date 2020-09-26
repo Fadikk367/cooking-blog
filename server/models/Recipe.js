@@ -4,18 +4,9 @@ const RecipeSchema = mongoose.Schema({
   title: {
     type: String,
   },
-  description: {
-    type: String,
-  },
   date: {
     type: Date,
     default: Date.now
-  },
-  ingredients: {
-    type: [String],
-  },
-  content: {
-    type: String,
   },
   elements: [{}],
   comments: {
@@ -23,18 +14,11 @@ const RecipeSchema = mongoose.Schema({
     default: []
   },
   meta: {
-    type: {
-      hearts: Number,
-      difficulty: {
-        type: String,
-        enum: ['easy', 'medium', 'advanced'],
-      },
-      tags: {
-        type: [String],
-        default: [],
-        enum: ['vege', 'fit', 'natural', 'meat', 'diary', 'salad', 'vegetables']
-      },
-    },
+    difficulty: String,
+    time: String,
+    tags:  [String],
+    category: String,
+    description: String,
   },
 });
 

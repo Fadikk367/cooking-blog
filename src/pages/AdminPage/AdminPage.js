@@ -9,16 +9,14 @@ import {
   SubmitRecipeForm,
   MetaInfoForm,
 } from './components';
-import { AdminPageWrapper } from './AdminPage.css';
+import { AdminPageWrapper, TitleInput } from './AdminPage.css';
+import { updateRecipeTitle } from 'data/actions';
 
 import { Element } from '../../utils/elementTypes';
 
 
-const AdminPage = ({ deleteRecipeElementData, elements = [] }) => {
+const AdminPage = ({ updateRecipeTitle, elements = [] }) => {
   const [title, setTitle] = useState('');
-  const [metaInfo, setMetaInfo] = useState({});
-  console.log(elements);
-
 
   const renderRecieElement = ([key, data]) => {
     let recipeElement = null;
@@ -45,24 +43,33 @@ const AdminPage = ({ deleteRecipeElementData, elements = [] }) => {
     return recipeElement;
   }
 
+  const handleRecipeTitleUpdate = () => {
+    if(!title)
+      return;
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    console.log('dodaj przepis...')
+    updateRecipeTitle(title);
+  }
+
+  const handleTextareaResize = e => {
+    const element = e.target;
+    element.style.height = '50px';
+    element.style.height = `${element.scrollHeight}px`;
   }
 
   const renderedRecipeElements = elements.map(renderRecieElement);
 
   return (
     <AdminPageWrapper>
-      <h1>Create your awesome recipe!</h1>
-      <form onSubmit={handleFormSubmit}>
-        <label for="title">Tytuł:</label><br />
-        <input type="text" name="title" value={title} onChange={e => setTitle(e.target.value)}/><br />
-        {renderedRecipeElements}
-        <MetaInfoForm />
-        <SubmitRecipeForm />
-      </form>
+      <TitleInput 
+        value={title} 
+        onChange={e => setTitle(e.target.value)} 
+        onInput={handleTextareaResize}
+        onBlur={handleRecipeTitleUpdate}
+        placeholder='Recipe title...'
+      />
+      {renderedRecipeElements}
+      <MetaInfoForm />
+      <SubmitRecipeForm />
     </AdminPageWrapper>
   )
 }
@@ -73,4 +80,4 @@ const mapStateToProps = state => ({
   }),
 });
 
-export default connect(mapStateToProps, {})(AdminPage);
+export default connect(mapStateToProps, { updateRecipeTitle })(AdminPage);

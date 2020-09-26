@@ -1,6 +1,16 @@
 import styled from 'styled-components';
 
 
+export const RecipeTitle = styled.h1`
+  margin: 0;
+  padding: 30px;
+  border: 2px solid black;
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 400;
+  letter-spacing: 2px;
+`;
+
 export const RecipeHeader = styled.h2`
   padding: 2rem;
   margin: 0;
@@ -15,9 +25,9 @@ export const RecipeHeader = styled.h2`
 
 export const RecipeMainPhoto = styled.img`
   display: block;
-  width: 600px;
-  height: 600px;
+  width: 100%;
   margin: 2rem auto;
+  border-radius: 15px;
 `;
 
 export const RecipeIngredientList = styled.section`

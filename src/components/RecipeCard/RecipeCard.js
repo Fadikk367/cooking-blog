@@ -13,8 +13,8 @@ import {
 import image from 'images/test-image-1.jpg';
 
 import heartIcon from 'svgs/heart.svg';
-import commentIcon from 'svgs/comment.svg';
-import shareIcon from 'svgs/share.svg';
+// import commentIcon from 'svgs/comment.svg';
+// import shareIcon from 'svgs/share.svg';
 
 
 const RecipeCard = ({ title, content, date, difficulty }) => {

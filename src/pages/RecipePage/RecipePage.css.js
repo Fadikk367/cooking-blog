@@ -9,10 +9,4 @@ export const RecipePageWrapper = styled.main`
   display: flex;
   flex-direction: column;
   background: skyblue;
-
-  img {
-    height: 100%;
-    width: 100%;
-    max-width: 600px;
-  }
 `;

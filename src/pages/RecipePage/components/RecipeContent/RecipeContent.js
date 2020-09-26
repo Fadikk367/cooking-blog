@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { RecipeHeader, RecipeIngredientList, RecipeMainPhoto, RecipeParagraph } from './RecipeContent.css';
+import { RecipeTitle, RecipeHeader, RecipeIngredientList, RecipeMainPhoto, RecipeParagraph } from './RecipeContent.css';
 import { Element } from 'utils/elementTypes';
 
 
 const RecipeContent = ({ recipe }) => {
+  console.log(recipe);
 
   const renderRecipeElement = element => {
     let recipeElement;
@@ -41,7 +42,7 @@ const RecipeContent = ({ recipe }) => {
 
   return (
     <>
-      <RecipeHeader>{recipe.title}</RecipeHeader>
+      <RecipeTitle>{recipe.title}</RecipeTitle>
       {renderedElements}
     </>
   )

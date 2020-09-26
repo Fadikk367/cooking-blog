@@ -5,3 +5,4 @@ export const VALIDATE_RECIPE = 'VALIDATE_RECIPE';
 export const MOVE_ELEMENT = 'MOVE_ELEMENT';
 export const POST_RECIPE = 'POST_RECIPE';
 export const UPDATE_METADATA = 'UPDATE_METADATA';
+export const UPDATE_TITLE = 'UPDATE_TITLE';

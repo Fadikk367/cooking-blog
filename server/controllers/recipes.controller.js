@@ -33,12 +33,10 @@ exports.getFullRecipe = async (req, res, next) => {
 exports.postRecipe = async (req, res, next) => {
   const {
     title,
-    content,
-    difficulty,
-    ingredients
+    metadata,
   } = req.body;
   const photos = req.files;
-  console.log({ photos });
+  // console.log({ photos });
   const elements =  JSON.parse(req.body.elements);
   for (let element of elements) {
     if (element.type === 'PHOTO') {
@@ -53,12 +51,8 @@ exports.postRecipe = async (req, res, next) => {
   try {
     const recipe = new Recipe({
       title,
-      ingredients,
-      content,
       elements,
-      meta: {
-        difficulty
-      }
+      meta: metadata,
     });
 
     const createdRecipe = await recipe.save();

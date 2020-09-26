@@ -1,4 +1,4 @@
-import { CREATE_ELEMENT, UPDATE_ELEMENT, DELETE_ELEMENT, MOVE_ELEMENT, UPDATE_METADATA } from '../constants/admin.constants';
+import { CREATE_ELEMENT, UPDATE_ELEMENT, DELETE_ELEMENT, MOVE_ELEMENT, UPDATE_METADATA, UPDATE_TITLE } from '../constants/admin.constants';
 import { Element } from '../../utils/elementTypes';
 
 // const idGenerator = elementIdGenerator();
@@ -9,6 +9,7 @@ const initialState = {
     authToken: null,
   },
   recipe: {
+    title: '',
     metadata: {},
     elements: {},
   },
@@ -25,8 +26,9 @@ export const adminReducer = (state = initialState, action) => {
     case MOVE_ELEMENT:
       return swapRecipeElements(state, action);
     case UPDATE_METADATA:
-      console.log('main admin reducer');
       return updateRecipeMetadata(state, action);
+    case UPDATE_TITLE:
+      return updateRecipeTitle(state, action);
     default:
       return state;
   }
@@ -172,6 +174,18 @@ const updateRecipeMetadata = (state, action) => {
         ...state.recipe.metadata,
         [metaKey]: metaValue,
       }
+    }
+  }
+}
+
+const updateRecipeTitle = (state, action) => {
+  const { title } = action.payload;
+
+  return {
+    ...state,
+    recipe: {
+      ...state.recipe,
+      title,
     }
   }
 }

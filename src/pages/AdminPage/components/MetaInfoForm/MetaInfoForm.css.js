@@ -4,7 +4,6 @@ export const MetaFormWrapper = styled.section`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  border: 2px solid black;
 `;
 
 export const MetaLabel = styled.label`
@@ -47,7 +46,8 @@ export const MetaTextara = styled.textarea`
   border: none;
   border-bottom: 2px solid black;
   transition: background-color 0.3s ease-in-out;
-  width: 600px;
+  flex-grow: 1;
+  max-width: 800px;
   height: 60px;
   resize: none;
 
