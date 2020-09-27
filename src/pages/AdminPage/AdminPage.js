@@ -6,6 +6,7 @@ import {
   PhotoController, 
   ListController,
   HeaderController,
+  HintController,
   SubmitRecipeForm,
   MetaInfoForm,
 } from './components';
@@ -37,6 +38,10 @@ const AdminPage = ({ updateRecipeTitle, elements = [] }) => {
         recipeElement = <HeaderController key={key} id={key}/>
         break;
       }
+    case Element.HINT: {
+      recipeElement = <HintController key={key} id={key}/>
+      break;
+      }
       default:
         return;
     }
@@ -52,8 +57,8 @@ const AdminPage = ({ updateRecipeTitle, elements = [] }) => {
 
   const handleTextareaResize = e => {
     const element = e.target;
-    element.style.height = '50px';
-    element.style.height = `${element.scrollHeight}px`;
+    element.style.height = 'auto';
+    element.style.height = `${element.scrollHeight - 40}px`;
   }
 
   const renderedRecipeElements = elements.map(renderRecieElement);

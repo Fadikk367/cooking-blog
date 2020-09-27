@@ -5,7 +5,6 @@ const ControllerWrapper = styled.div`
   height: 100%;
   width: 100%;
   border: 2px dashed transparent;
-  margin-bottom: 20px;
   transition: all 0.4s ease-in-out;
   box-sizing: border-box;
 

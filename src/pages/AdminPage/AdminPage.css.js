@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export const AdminPageWrapper = styled.div`
   display: flex;
   width: 100%;
+  max-width: 960px;
   min-height: 70vh;
+  margin: 0 auto;
   flex-direction: column;
 `;
 

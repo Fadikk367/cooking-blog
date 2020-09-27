@@ -71,6 +71,13 @@ const createRecipeElement = (state, action) => {
         index,
       }
       break;
+    case Element.HINT:
+      newRecipeElement = {
+        type: Element.HINT,
+        text: '',
+        index,
+      }
+      break;
     default:
       return state;
   }
@@ -109,6 +116,9 @@ const updateRecipeElement = (state, action) => {
       elementToUpdate.title = action.payload.update.title;
       elementToUpdate.items = action.payload.update.items;
       break;
+    case Element.HINT:
+      elementToUpdate.text = action.payload.update;
+      break; 
     default:
       return state;
   }
