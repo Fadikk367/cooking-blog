@@ -8,5 +8,6 @@ export const RecipePageWrapper = styled.main`
   margin: auto;
   display: flex;
   flex-direction: column;
-  background: skyblue;
+  background: #f5f5e6;
+  box-shadow: 0px 0px 30px 5px rgba(148,148,148,1);
 `;

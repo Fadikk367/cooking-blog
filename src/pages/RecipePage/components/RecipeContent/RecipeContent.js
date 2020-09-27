@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { RecipeTitle, RecipeHeader, RecipeIngredientList, RecipeMainPhoto, RecipeParagraph } from './RecipeContent.css';
+import { RecipeTitle, RecipeHeader, RecipeIngredientList, RecipePhoto, RecipeParagraph } from './RecipeContent.css';
 import { Element } from 'utils/elementTypes';
 
 
@@ -15,7 +15,7 @@ const RecipeContent = ({ recipe }) => {
         recipeElement = <RecipeParagraph key={String(Math.random())}>{element.text}</RecipeParagraph>
         break;
       case Element.PHOTO:
-        recipeElement = <RecipeMainPhoto src={element.photo} alt={element.photoName} key={String(Math.random())}/>
+        recipeElement = <RecipePhoto src={element.photo} alt={element.photoName} key={String(Math.random())}/>
         break;
       case Element.HEADER:
         recipeElement = <RecipeHeader key={String(Math.random())}>{element.text}</RecipeHeader>

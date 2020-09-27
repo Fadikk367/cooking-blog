@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 
 export const RecipeTitle = styled.h1`
-  margin: 0;
+font-family: 'Kalam', cursive;
+  margin: 2rem 2rem 0 2rem;
   padding: 30px;
   border: 2px solid black;
   text-align: center;
@@ -12,46 +13,52 @@ export const RecipeTitle = styled.h1`
 `;
 
 export const RecipeHeader = styled.h2`
-  padding: 2rem;
-  margin: 0;
-  background: lightgreen;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-family: 'Kalam', cursive;
+  padding: 0 0 1rem 1rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
   font-size: 2em;
   font-weight: 400;
   letter-spacing: 1px;
+  border-bottom: 2px solid black;
 `;
 
-export const RecipeMainPhoto = styled.img`
+export const RecipePhoto = styled.img`
   display: block;
-  width: 100%;
-  margin: 2rem auto;
+  width: calc(100% - 4rem);
+  /* max-width: 800px; */
+  padding: 0 2rem;
+  margin: 2rem 0;
   border-radius: 15px;
 `;
 
 export const RecipeIngredientList = styled.section`
-  margin: 2rem 6rem;
+  margin: 2rem 8rem;
   h3 {
-    padding: 1rem;
-    font-size: 1.5em;
-    font-weight: 400;
+    margin: 0;
+    padding: 0 0 0.5rem 0.5rem;
+    font-family: 'Kalam', cursive;
+    font-size: 1.8em;
+    font-weight: 500;
     letter-spacing: 1px;
     border-bottom: 1px solid black;
   }
   ul {
-    padding: 1rem;
-    list-style-type: none;
-    font-size: 1.3em;
+    list-style-type: disc;
+    padding: 0.5rem 2rem;
+    font-family: 'Kalam', cursive;
+    font-size: 1.5em;
 
     li {
-      padding: 0.5rem 0;
+      padding: 0.3rem 0;
     }
   }
 `;
 
 export const RecipeParagraph = styled.p`
-  margin: 2rem 6rem;
+  margin: 1rem auto;
   font-size: 1.3em;
-  text-justify: justfy;
+  max-width: 800px;
+  text-align: justify;
 `;
