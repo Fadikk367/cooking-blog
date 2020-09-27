@@ -1,12 +1,17 @@
 import React from 'react';
 
-import { HeaderWrapper } from './Header.css';
+import { HeaderWrapper, Title, TitleText, TitleLogo } from './Header.css';
+
+import chefHatIcon from 'svgs/chef-hat.svg'
 
 
 const Footer = () => {
   return (
     <HeaderWrapper>
-      Header here
+      <Title>
+        <TitleLogo src={chefHatIcon}/>
+        <TitleText>Wiesia Gotuje</TitleText>
+      </Title>
     </HeaderWrapper>
   )
 }
