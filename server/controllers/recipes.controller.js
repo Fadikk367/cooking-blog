@@ -31,13 +31,14 @@ exports.getFullRecipe = async (req, res, next) => {
 
 
 exports.postRecipe = async (req, res, next) => {
-  const {
+  let {
     title,
     metadata,
   } = req.body;
   const photos = req.files;
-  // console.log({ photos });
   const elements =  JSON.parse(req.body.elements);
+  metadata = JSON.parse(metadata);
+
   for (let element of elements) {
     if (element.type === 'PHOTO') {
       const correspondingPhoto = photos.find(photo => photo.originalname === element.photoName);

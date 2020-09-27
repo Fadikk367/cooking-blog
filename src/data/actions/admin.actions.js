@@ -10,7 +10,7 @@ export const addRecipe = ({ title, metadata, elements, photos }) => {
 
   const formData = new FormData();
   formData.append('title', title);
-  formData.append('metadata', metadata);
+  formData.append('metadata', JSON.stringify(metadata));
   formData.append('elements', JSON.stringify(elements));
   for (let photo of photos)
     formData.append('photos', photo);
