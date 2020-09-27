@@ -4,4 +4,5 @@ export class Element {
   static LIST = 'LIST';
   static HEADER = 'HEADER';
   static TITLE = 'TITLE';
+  static HINT = 'HINT';
 }

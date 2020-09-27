@@ -2,25 +2,21 @@ import styled from 'styled-components';
 
 
 export const ControllerContent = styled.div`
-  padding: 5px;
-  transform: translateY(0);
+  padding: 30px 20px;
   transition: transform 0.4s ease-in-out;
-
-  div {
-    font-size: 1.2em;
-    padding: 5px;
-    background: lightgray;
-    border-radius: 7px;
-  }
 
   textarea {
     resize: none;
     font-size: 1.2em;
-    background: lightgray;
-    border-radius: 7px;
-    padding: 5px;
+    padding: 10px;
     outline: none;
     border: none;
-    width: calc(100% - 5px);
+    width: calc(100% - 20px);
+    transition: background-color 0.3s ease-in-out;
   }
+    &:hover {
+      textarea {
+        background-color: lightgray;
+      }
+    }
 `;

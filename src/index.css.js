@@ -9,6 +9,7 @@ export default createGlobalStyle`
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: 'Poppins', sans-serif;
   }
  
   ul {
