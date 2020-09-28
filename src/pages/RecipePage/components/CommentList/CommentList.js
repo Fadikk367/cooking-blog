@@ -6,7 +6,7 @@ import { CommentListContainer, ReplyFormButton } from './CommentList.css';
 const CommentList = ({ recipeId, parentCommentId = null, indentLevel = 0, comments, isOpen = false }) => {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const renderedComments = comments.map(comment => (
-    <Comment key={comment._id} {...comment} indentLevel={indentLevel}/> 
+    <Comment key={comment._id} commentData={comment} indentLevel={indentLevel}/> 
   ))
   return isOpen ? (
     <CommentListContainer isOpen={isOpen} indentLevel={indentLevel} style={isOpen ? { display: 'block' } : { display: 'none' }}>

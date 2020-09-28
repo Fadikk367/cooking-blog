@@ -56,3 +56,31 @@ export const CommentControlBar = styled.div`
     width: 200px;
   }
 `;
+
+
+
+
+export const ReactionBtn = styled.button`
+display: flex;
+justify-content: center;
+align-items: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+`;
+
+export const ReactionIcon = styled.img`
+  display: inline-block;
+  width: 30px;
+  padding: 7px;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2) rotate(-7deg);
+  }
+`;
+
+export const ReactionCounter = styled.span`
+  font-weight: ${props => props.isChoosen ? '500' : '300'};
+`;

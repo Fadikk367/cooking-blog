@@ -9,5 +9,9 @@ router.post('/', commentsController.createComment);
 
 router.get('/:parentId/answers', commentsController.getSubcommentsById);
 
+router.put('/:commentId/reaction/change', commentsController.changeCommentReaction);
+router.put('/:commentId/reaction/:reaction', commentsController.addCommentReaction);
+
+
 
 module.exports = router;

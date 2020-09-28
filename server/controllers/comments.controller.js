@@ -50,3 +50,46 @@ exports.getSubcommentsById = async (req, res, next) => {
     next(err);
   }
 }
+
+exports.addCommentReaction = async (req, res, next) => {
+  const commentId = req.params.commentId;
+  const reaction = req.params.reaction;
+
+  console.log({ commentId, reaction });
+
+  if (!commentId || !reaction) {
+    next(new Error('Comment with such Id does not exist or reaction is missing!'));
+  }
+
+  try {
+    const comment = await Comment.findOne({ _id: commentId });
+    comment.reactions[reaction] += 1;
+    await comment.save();
+    res.json({ ok: true });
+  } catch(err) {
+    next(err);
+  }
+}
+
+
+exports.changeCommentReaction = async (req, res, next) => {
+  const commentId = req.params.commentId;
+  const previousReaction = req.query.from;
+  const newReaction = req.query.to;
+
+  console.log({ commentId, previousReaction, newReaction });
+
+  if (!commentId) {
+    next(new Error('Comment with such Id does not exist!'));
+  }
+
+  try {
+    const comment = await Comment.findOne({ _id: commentId });
+    comment.reactions[previousReaction] -= 1;
+    comment.reactions[newReaction] += 1;
+    await comment.save();
+    res.json({ ok: true });
+  } catch(err) {
+    next(err);
+  }
+}
