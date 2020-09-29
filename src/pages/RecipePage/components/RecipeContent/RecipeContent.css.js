@@ -59,6 +59,7 @@ export const RecipeIngredientList = styled.section`
 export const RecipeParagraph = styled.p`
   margin: 1rem auto;
   font-size: 1.3em;
+  width: 100%;
   max-width: 800px;
   text-align: justify;
 `;

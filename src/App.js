@@ -17,38 +17,33 @@ const navigationItems = [
 
 const App = () => {
   const sidebarRef = useRef(null);
-  // const [sidebarPos, setSidebarPos] = useState(281);
+  const navRef = useRef(null);
+  const [isSidebarStick, setIsSidebarStick] = useState(false);
   // const [isSideberSticked, setIsSideberSticked] = useState(false);
 
-  // const handleWindowScroll = () => {
-  //   const offsetY = window.pageYOffset;
-  //   console.log({ offsetY, sidebarPos, isSideberSticked });
-  //   if (offsetY >= sidebarPos && !isSideberSticked) {
-      
-  //     setIsSideberSticked(prev => !prev);
-  //     sidebarRef.current.style.position = 'fixed';
-  //     sidebarRef.current.style.top = '0';
-  //     sidebarRef.current.style.right = '0';
-  //     sidebarRef.current.style.height = '100vh';
-  //   } else if (offsetY < sidebarPos && !isSideberSticked) {
-  //     setIsSideberSticked(prev => !prev);
-  //     sidebarRef.current.style.position = 'static';
-  //     sidebarRef.current.style.height = '70vh';
-  //   }
-  // }
+  const handleWindowScroll = () => {
+    const offsetY = window.pageYOffset;
+    const navBottomPosition = navRef.current.offsetTop + 60;
+    console.log({ offsetY, navBottomPosition, isSidebarStick });
+    if (offsetY + 60 >= navBottomPosition) {
+      setIsSidebarStick(true);
+      sidebarRef.current.style.position = 'fixed';
+    } else if (offsetY + 60 < navBottomPosition) {
+      setIsSidebarStick(false);
+      sidebarRef.current.style.position = 'static';
+    }
+  }
 
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleWindowScroll);
-
-  //   setSidebarPos(sidebarRef.current.offsetTop);
-  // }, [sidebarRef])
+  useEffect(() => {
+    window.addEventListener('scroll', handleWindowScroll);
+  }, [])
 
   return (
     <>
       <GlobalStyles />
       <Router>
         <Header />
-        <Navigation items={navigationItems} rightElement={null}/>
+        <Navigation items={navigationItems} rightElement={null} navRef={navRef}/>
         <Switch>
           <Route path="/recipes/:recipeId" exact component={RecipePage} />
           <Route path="*"> 

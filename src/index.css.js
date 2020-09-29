@@ -20,6 +20,6 @@ export default createGlobalStyle`
 `;
 
 export const Main = styled.main`
-  min-height: 70vh;
+  min-height: calc(60vh - 60px);
   display: flex;
 `;

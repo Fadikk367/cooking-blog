@@ -5,7 +5,7 @@ export const NavContainer = styled.div`
   position: sticky;
   top: 0;
   z-index: 1000;
-  height: 10vh;
+  height: 60px;
   background: #b3b3b3;
   display: flex;
   align-items: conter;

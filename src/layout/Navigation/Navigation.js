@@ -7,7 +7,7 @@ import { SearchBox } from './components';
 
 import searchImg from 'svgs/search.svg';
 
-const Navigation = ({ items=[], rightElement, recipeTitleList, searchState }) => {
+const Navigation = ({ items=[], rightElement, recipeTitleList, searchState, navRef }) => {
 
   const isLoaded = useMemo(() => {
     return (searchState && Object.keys(searchState) === 0)
@@ -25,7 +25,7 @@ const Navigation = ({ items=[], rightElement, recipeTitleList, searchState }) =>
     </NavLink>
   ))
   return (
-    <NavContainer>
+    <NavContainer ref={navRef}>
       {/* <NavSearchBar>
         <img src={searchImg} alt="" className="search-icon"/>
         <input type="text" name="search" placeholder="szukaj..." list="recipeTitles" autocomplete="off"/>
