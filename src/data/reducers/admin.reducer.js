@@ -46,6 +46,7 @@ const createRecipeElement = (state, action) => {
       newRecipeElement = {
         type: Element.PHOTO,
         photo: null,
+        orientation: '',
         index,
       };
       break;
@@ -104,7 +105,8 @@ const updateRecipeElement = (state, action) => {
     case Element.PHOTO:
       if (elementToUpdate.photo)
         URL.revokeObjectURL(elementToUpdate.photo);
-      elementToUpdate.photo = action.payload.update;
+      elementToUpdate.photo = action.payload.update.url;
+      elementToUpdate.orientation = action.payload.update.orientation;
       break;
     case Element.PARAGRAPH:
       elementToUpdate.text = action.payload.update;

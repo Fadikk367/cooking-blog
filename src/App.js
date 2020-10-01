@@ -21,22 +21,22 @@ const App = () => {
   const [isSidebarStick, setIsSidebarStick] = useState(false);
   // const [isSideberSticked, setIsSideberSticked] = useState(false);
 
-  const handleWindowScroll = () => {
-    const offsetY = window.pageYOffset;
-    const navBottomPosition = navRef.current.offsetTop + 60;
-    console.log({ offsetY, navBottomPosition, isSidebarStick });
-    if (offsetY + 60 >= navBottomPosition) {
-      setIsSidebarStick(true);
-      sidebarRef.current.style.position = 'fixed';
-    } else if (offsetY + 60 < navBottomPosition) {
-      setIsSidebarStick(false);
-      sidebarRef.current.style.position = 'static';
-    }
-  }
+  // const handleWindowScroll = () => {
+  //   const offsetY = window.pageYOffset;
+  //   const navBottomPosition = navRef.current.offsetTop + 60;
+  //   console.log({ offsetY, navBottomPosition, isSidebarStick });
+  //   if (offsetY + 60 >= navBottomPosition) {
+  //     setIsSidebarStick(true);
+  //     sidebarRef.current.style.position = 'fixed';
+  //   } else if (offsetY + 60 < navBottomPosition) {
+  //     setIsSidebarStick(false);
+  //     sidebarRef.current.style.position = 'static';
+  //   }
+  // }
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleWindowScroll);
-  }, [])
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleWindowScroll);
+  // }, [])
 
   return (
     <>

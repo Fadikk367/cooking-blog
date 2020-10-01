@@ -15,7 +15,7 @@ const RecipeContent = ({ recipe }) => {
         recipeElement = <RecipeParagraph key={String(Math.random())}>{element.text}</RecipeParagraph>
         break;
       case Element.PHOTO:
-        recipeElement = <RecipePhoto src={element.photo} alt={element.photoName} key={String(Math.random())}/>
+        recipeElement = <RecipePhoto src={element.photo} alt={element.photoName} key={String(Math.random())} orientation={element.orientation}/>
         break;
       case Element.HEADER:
         recipeElement = <RecipeHeader key={String(Math.random())}>{element.text}</RecipeHeader>

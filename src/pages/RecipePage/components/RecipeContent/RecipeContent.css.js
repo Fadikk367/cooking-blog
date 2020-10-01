@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PhotoOrientation } from '../../../../utils/elementTypes'
 
 
 export const RecipeTitle = styled.h1`
@@ -27,7 +28,7 @@ export const RecipeHeader = styled.h2`
 export const RecipePhoto = styled.img`
   display: block;
   width: calc(100% - 4rem);
-  /* max-width: 800px; */
+  max-width: ${props => props.orientation === PhotoOrientation.VERTICAL ? '800px' : '100%'};
   padding: 0 2rem;
   margin: 2rem 0;
   border-radius: 15px;

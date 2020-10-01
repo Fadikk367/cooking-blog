@@ -9,12 +9,15 @@ import {
  } from './PhotoController.css';
 
 import { updateRecipeElementData } from '../../../../data/actions/admin.actions';
+import { PhotoOrientation } from '../../../../utils/elementTypes';
+import { determinePhotoOrientation } from '../../../../utils/helpers';
 
 import imageIcon from '../../../../svgs/image.svg'
 
 const PhotoController = ({ id, updateRecipeElementData }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [photoOrientation, setPhotoOrientation] = useState(null);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -24,7 +27,16 @@ const PhotoController = ({ id, updateRecipeElementData }) => {
 
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreview(objectUrl);
-    updateRecipeElementData(id, objectUrl);
+    
+    
+    const image = new Image();
+    image.src = objectUrl;
+    
+    image.onload = () => {
+      const orientation = determinePhotoOrientation(image);
+      setPhotoOrientation(orientation);
+      updateRecipeElementData(id, { url: objectUrl, orientation});
+    };
   }, [selectedFile, updateRecipeElementData, id]);
 
   const handleFileSelect = e => {
