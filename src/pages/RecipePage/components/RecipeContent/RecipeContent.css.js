@@ -3,7 +3,7 @@ import { PhotoOrientation } from '../../../../utils/elementTypes'
 
 
 export const RecipeTitle = styled.h1`
-font-family: 'Kalam', cursive;
+  font-family: 'Kalam', cursive;
   margin: 2rem 2rem 0 2rem;
   padding: 30px;
   border: 2px solid black;
@@ -30,7 +30,7 @@ export const RecipePhoto = styled.img`
   width: calc(100% - 4rem);
   max-width: ${props => props.orientation === PhotoOrientation.VERTICAL ? '800px' : '100%'};
   padding: 0 2rem;
-  margin: 2rem 0;
+  margin: 2rem auto;
   border-radius: 15px;
 `;
 

@@ -63,10 +63,54 @@ export const ListItem = styled.li`
     padding: 3px 0;
     border: none;
     transition: all 0.3s ease-in-out;
-    border-bottom: 2px solid transparent;
+    border-bottom: 2px solid black;
+    margin-right: 10px;
     
     &:hover {
-      border-bottom: 2px solid grey;
+    background-color: lightgrey;
+  }
+
+    &:focus {
+      background-color: lightgray;
     }
+  }
+`;
+
+
+export const UnitSelect = styled.select`
+  /* padding: 3px 0; */
+  font-size: 1em;
+  background: white;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid black;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: lightgrey;
+  }
+
+  &:focus {
+    background-color: lightgray;
+  }
+`;
+
+export const QuantityInput = styled.input`
+  margin-right: 10px;
+  padding: 3px 0;
+  font-size: 1em;
+  background: white;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid black;
+  transition: background-color 0.3s ease-in-out;
+  width: 60px;
+
+  &:hover {
+    background-color: lightgrey;
+  }
+
+  &:focus {
+    background-color: lightgray;
   }
 `;

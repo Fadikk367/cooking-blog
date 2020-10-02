@@ -6,6 +6,9 @@ export const ControllerContent = styled.div`
   transition: transform 0.4s ease-in-out;
 
   textarea {
+    margin: 1rem auto;
+    font-size: 1.3em;
+    text-align: justify;
     resize: none;
     font-size: 1.2em;
     padding: 10px;

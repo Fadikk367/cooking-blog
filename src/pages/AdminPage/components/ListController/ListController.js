@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { ControllerWrapper, ElementControls } from 'components';
 import { 
   ListItem,
-  ListTitle
+  ListTitle,
+  UnitSelect,
+  QuantityInput,
 } from './ListController.css';
 
 import { updateRecipeElementData } from '../../../../data/actions/admin.actions';
@@ -13,7 +15,9 @@ import { updateRecipeElementData } from '../../../../data/actions/admin.actions'
 const ListController = ({ id, updateRecipeElementData }) => {
   const [listTitle, setListTitle] = useState('');
   const [listItems, setListItems] = useState(['marchew', 'coconut', 'pomidor']);
-  const [currentItem, setCurrentItem] = useState('');
+  const [ingredientName, setIngredientName] = useState('');
+  const [ingredientUnit, setIngredientUnit] = useState('');
+  const [ingredientQuantity, setIngredientQuantity] = useState(1);
   console.log(listItems);
 
   const handleElementUpdate = id => {
@@ -25,15 +29,20 @@ const ListController = ({ id, updateRecipeElementData }) => {
   }
 
   const handleAddItem = () => {
-    if (currentItem) {
-      const newItems = [...listItems, currentItem];
+    if (ingredientName && ingredientUnit && ingredientQuantity) {
+      const newItems = [...listItems, {
+        name: ingredientName,
+        quantity: ingredientQuantity,
+        unit: ingredientUnit,
+      }];
       const update = {
         title: listTitle,
         items: newItems
       };
 
       setListItems(newItems);
-      setCurrentItem('');
+      setIngredientName('');
+      setIngredientQuantity(1);
       updateRecipeElementData(id, update);
     }
   }
@@ -51,7 +60,10 @@ const ListController = ({ id, updateRecipeElementData }) => {
     };
 
     return listItems.map(item => (
-      <ListItem key={item}>{item}<button onClick={() => handleDeleteItem(item)}>x</button></ListItem>
+      <ListItem key={item.name}>
+        {item.name} - {item.quantity} {item.unit}
+        <button onClick={() => handleDeleteItem(item)}>x</button>
+      </ListItem>
     ))
   }, [listItems, setListItems, updateRecipeElementData, id, listTitle]);
 
@@ -70,7 +82,26 @@ const ListController = ({ id, updateRecipeElementData }) => {
       <ul>
         {renderedListItems}
         <ListItem isInput={true}>
-          <input type="text" value={currentItem} onChange={e => setCurrentItem(e.target.value)}/>
+          <input type="text" value={ingredientName} onChange={e => setIngredientName(e.target.value)} placeholder='składnik'/>
+          <QuantityInput 
+            type="number" 
+            placeholder='ilość'
+            value={ingredientQuantity}
+            onChange={e => setIngredientQuantity(e.target.value)}
+          />
+          <UnitSelect  
+            value={ingredientUnit} 
+            onChange={e => setIngredientUnit(e.target.value)}
+            name='unit'
+          >
+            <option value="szt.">sztuk</option>
+            <option value="ml">ml</option>
+            <option value="g">g</option>
+            <option value="dag">dag</option>
+            <option value="szkl">szklanek.</option>
+            <option value="łyżek">łyżek</option>
+            <option value="łyżeczek">łyżeczek</option>
+          </UnitSelect>
           <button onClick={handleAddItem}>+</button>
         </ListItem>
       </ul>

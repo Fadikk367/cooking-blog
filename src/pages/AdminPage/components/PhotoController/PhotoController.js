@@ -52,7 +52,7 @@ const PhotoController = ({ id, updateRecipeElementData }) => {
     <ControllerWrapper>
       <ElementControls id={id}/>
       <ControllerContent className="content" isImageSelected={!!selectedFile}>
-        {selectedFile ? <ImagePreview src={preview} alt="delected file"/> : null}
+        {selectedFile ? <ImagePreview src={preview} orientation={photoOrientation} alt="delected file"/> : null}
         <DropZone for="file-input" isHidden={!!selectedFile}>
           <img src={imageIcon} alt=""/>
           <h2>Wybierz zdjecie</h2>

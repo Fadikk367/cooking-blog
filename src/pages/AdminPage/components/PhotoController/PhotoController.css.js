@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {  PhotoOrientation} from '../../../../utils/elementTypes';
 
 
 export const ControllerContent = styled.div`
@@ -15,8 +16,10 @@ export const ControllerContent = styled.div`
 
 export const ImagePreview = styled.img`
   display: block;
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 4rem);
+  max-width: ${props => props.orientation === PhotoOrientation.VERTICAL ? '800px' : '100%'};
+  padding: 0 2rem;
+  margin: 2rem auto;
   border-radius: 15px;
   transition: filter 0.4s ease-in-out;
 `;
