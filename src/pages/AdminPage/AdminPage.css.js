@@ -6,6 +6,7 @@ export const AdminPageWrapper = styled.div`
   max-width: 960px;
   min-height: 70vh;
   margin: 0 auto;
+  background: #f5f5e6;
   flex-direction: column;
 `;
 

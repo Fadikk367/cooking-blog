@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const SubmitFormWrapper = styled.div`
-  height: 200px;
-  background: orange;
+  height: 100px;
   width: 100%;
 `;
 
