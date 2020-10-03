@@ -70,6 +70,7 @@ export const ImageThumbnailBox = styled.div`
   img { 
     flex-shrink: 0;
     width: 100%;
+    min-height: 340px;
     transition: all 0.6s ease-in-out;
   }
 `;
