@@ -10,7 +10,7 @@ const Sidebar = ({ sidebarRef }) => {
     <SidebarWrapper>
       <SidebarContent ref={sidebarRef}>
         <Switch>
-          <Route exact path='/admin'>
+          <Route exact path='/admin/recipe/new'>
             <ElementSelectionPanel />
 
           </Route>

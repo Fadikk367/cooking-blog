@@ -46,7 +46,7 @@ export const RecipeIngredientList = styled.section`
     border-bottom: 1px solid black;
   }
   ul {
-    list-style-type: disc;
+    list-style-type: circle;
     padding: 0.5rem 2rem;
     font-family: 'Kalam', cursive;
     font-size: 1.5em;

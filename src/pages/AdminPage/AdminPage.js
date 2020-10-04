@@ -1,88 +1,27 @@
-import React, { useState} from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { 
-  ParagraphController, 
-  PhotoController, 
-  ListController,
-  HeaderController,
-  HintController,
-  SubmitRecipeForm,
-  MetaInfoForm,
-} from './components';
-import { AdminPageWrapper, TitleInput } from './AdminPage.css';
-import { updateRecipeTitle } from 'data/actions';
+import { AdminPageWrapper, AdminActionList, AdminActionItem } from './AdminPage.css';
+import { LinkCard } from './components';
 
-import { Element } from '../../utils/elementTypes';
+import fileAddIcon from 'svgs/file-add.svg';
+import fileEditIcon from 'svgs/file-edit.svg';
+import fileDeleteIcon from 'svgs/file-delete.svg';
 
 
-const AdminPage = ({ updateRecipeTitle, elements = [] }) => {
-  const [title, setTitle] = useState('');
-
-  const renderRecieElement = ([key, data]) => {
-    let recipeElement = null;
-    switch(data.type) {
-      case Element.PARAGRAPH: {
-        recipeElement = <ParagraphController key={key} id={key}/>
-        break;
-      }
-      case Element.PHOTO: {
-        recipeElement = <PhotoController key={key} id={key}/>
-        break;
-      }
-      case Element.LIST: {
-        recipeElement = <ListController key={key} id={key}/>
-        break;
-      }
-      case Element.HEADER: {
-        recipeElement = <HeaderController key={key} id={key}/>
-        break;
-      }
-    case Element.HINT: {
-      recipeElement = <HintController key={key} id={key}/>
-      break;
-      }
-      default:
-        return;
-    }
-    return recipeElement;
-  }
-
-  const handleRecipeTitleUpdate = () => {
-    if(!title)
-      return;
-
-    updateRecipeTitle(title);
-  }
-
-  const handleTextareaResize = e => {
-    const element = e.target;
-    element.style.height = 'auto';
-    element.style.height = `${element.scrollHeight - 40}px`;
-  }
-
-  const renderedRecipeElements = elements.map(renderRecieElement);
+const AdminPage = () => {
 
   return (
     <AdminPageWrapper>
-      <TitleInput 
-        value={title} 
-        onChange={e => setTitle(e.target.value)} 
-        onInput={handleTextareaResize}
-        onBlur={handleRecipeTitleUpdate}
-        placeholder='Recipe title...'
-      />
-      {renderedRecipeElements}
-      <MetaInfoForm />
-      <SubmitRecipeForm />
+      <AdminActionList>
+        <LinkCard to='admin/recipe/new' icon={fileAddIcon} text='Create recipe' bgColor={'#53b33b'}/>
+        <LinkCard to='admin/recipe/123/edit' icon={fileEditIcon} text='Edit recipe' bgColor={'#e6b329'}/>
+        <LinkCard to='admin/recipe/123/delete' icon={fileDeleteIcon} text='Delete recipe' bgColor={'#e62929'}/>
+      </AdminActionList>
     </AdminPageWrapper>
   )
 }
 
-const mapStateToProps = state => ({
-  elements: Object.entries(state.admin.recipe.elements).sort((a, b) => {
-    return a[1].index - b[1].index;
-  }),
-});
 
-export default connect(mapStateToProps, { updateRecipeTitle })(AdminPage);
+export default connect(null, null)(AdminPage);
