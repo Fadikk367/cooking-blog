@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 
-import { ControllerWrapper, ElementControls } from 'components';
+import { ControllerWrapper, ElementControls, Fraction } from 'components';
 import { 
   ListItem,
   ListTitle,
@@ -10,11 +10,12 @@ import {
 } from './ListController.css';
 
 import { updateRecipeElementData } from '../../../../data/actions/admin.actions';
+import { IngredientUnits } from 'utils/elementTypes';
 
 
 const ListController = ({ id, updateRecipeElementData }) => {
   const [listTitle, setListTitle] = useState('');
-  const [listItems, setListItems] = useState(['marchew', 'coconut', 'pomidor']);
+  const [listItems, setListItems] = useState([{ name: 'marchew', unit: 'szt.', quantity: '3'}, { name: 'kokos', unit: 'g', quantity: '150'}, { name: 'wołowina', unit: 'kg', quantity: '2'}]);
   const [ingredientName, setIngredientName] = useState('');
   const [ingredientUnit, setIngredientUnit] = useState('');
   const [ingredientQuantity, setIngredientQuantity] = useState(1);
@@ -67,10 +68,18 @@ const ListController = ({ id, updateRecipeElementData }) => {
     ))
   }, [listItems, setListItems, updateRecipeElementData, id, listTitle]);
 
+  const renderedUnitOptions = Object.values(IngredientUnits).map(unitOption => (
+    <option key={unitOption} value={unitOption}>{unitOption}</option>
+  ))
+
 
   return (
     <ControllerWrapper>
-      <ElementControls id={id} />
+      <ElementControls id={id} /><br /><br />
+      {<Fraction quantityString='2 2/5' multiplier={5}/>}<br /><br />
+      {<Fraction quantityString='0 1/7' multiplier={3}/>}<br /><br />
+      {<Fraction quantityString='4 2/3'/>}<br /><br />
+      {<Fraction quantityString='6/2'/>}<br /><br />
       <div className="content">
         <ListTitle 
           type="text" 
@@ -79,32 +88,27 @@ const ListController = ({ id, updateRecipeElementData }) => {
           placeholder='list title...'
           onBlur={() => handleElementUpdate(id)}
         />
-      <ul>
-        {renderedListItems}
-        <ListItem isInput={true}>
-          <input type="text" value={ingredientName} onChange={e => setIngredientName(e.target.value)} placeholder='składnik'/>
-          <QuantityInput 
-            type="number" 
-            placeholder='ilość'
-            value={ingredientQuantity}
-            onChange={e => setIngredientQuantity(e.target.value)}
-          />
-          <UnitSelect  
-            value={ingredientUnit} 
-            onChange={e => setIngredientUnit(e.target.value)}
-            name='unit'
-          >
-            <option value="szt.">sztuk</option>
-            <option value="ml">ml</option>
-            <option value="g">g</option>
-            <option value="dag">dag</option>
-            <option value="szkl">szklanek.</option>
-            <option value="łyżek">łyżek</option>
-            <option value="łyżeczek">łyżeczek</option>
-          </UnitSelect>
-          <button onClick={handleAddItem}>+</button>
-        </ListItem>
-      </ul>
+        <ul>
+          {<Fraction quantityString='2 2/3'/>}
+          {renderedListItems}
+          <ListItem isInput={true}>
+            <input type="text" value={ingredientName} onChange={e => setIngredientName(e.target.value)} placeholder='składnik'/>
+            <QuantityInput 
+              type="number" 
+              placeholder='ilość...'
+              value={ingredientQuantity}
+              onChange={e => setIngredientQuantity(e.target.value)}
+            />
+            <UnitSelect  
+              value={ingredientUnit} 
+              onChange={e => setIngredientUnit(e.target.value)}
+              name='unit'
+            >
+              {renderedUnitOptions}
+            </UnitSelect>
+            <button onClick={handleAddItem}>+</button>
+          </ListItem>
+        </ul>
       </div>
     </ControllerWrapper>
   )

@@ -13,3 +13,22 @@ export class PhotoOrientation {
   static VERTICAL = 'VERTICAL';
   static SQUARE = 'SQUARE';
 }
+
+
+export class IngredientUnits {
+  static KG = 'kg';
+  static SZT = 'szt.';
+  static SZTUKA = 'sztuka';
+  static ML = 'ml';
+  static G = 'g';
+  static DAG = 'dag';
+  static SZKL = 'szkl.';
+  static SZKLANKA = 'szklanka';
+  static ŁYŻKA = 'łyżka';
+  static ŁYŻKI = 'łyżki';
+  static ŁYŻEK = 'łyżek';
+  static ŁYŻECZKA = 'łyżeczka';
+  static ŁYŻECZKI = 'łyżeczki';
+  static ŁYŻECZEK = 'łyżeczek';
+}
+
