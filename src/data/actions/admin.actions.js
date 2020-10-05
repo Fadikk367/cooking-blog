@@ -15,7 +15,7 @@ export const addRecipe = ({ title, metadata, elements, photos }) => {
   for (let photo of photos)
     formData.append('photos', photo);
 
-  const promise = axios.post('recipes', formData, config);
+  const promise = axios.post('/recipes', formData, config);
 
   return {
     promise,

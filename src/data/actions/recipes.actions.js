@@ -2,7 +2,7 @@ import axios from 'axios';
 import { RECIPES_GET, RECIPES_ADD, RECIPE_GET } from '../constants';
 
 export const fetchRecipeCards = () => {
-  const promise = axios.get('recipes');
+  const promise = axios.get('/recipes');
 
   return {
     promise,
@@ -11,7 +11,7 @@ export const fetchRecipeCards = () => {
 }
 
 export const fetchRecipe = recipeId => {
-  const promise = axios.get(`${recipeId}`);
+  const promise = axios.get(`/recipe/${recipeId}`);
 
   return {
     promise,
@@ -20,7 +20,7 @@ export const fetchRecipe = recipeId => {
 }
 
 export const addRecipe = ({ title, content, difficulty, ingredients }) => {
-  const promise = axios.post('recipes', {
+  const promise = axios.post('/recipes', {
     title,
     content,
     difficulty,

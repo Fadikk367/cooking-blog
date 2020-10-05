@@ -3,7 +3,7 @@ import { COMMENTS_GET, COMMENT_ADD } from '../constants';
 
 
 export const fetchCommentsByRecipeId = recipeId => {
-  const promise = axios.get(`${recipeId}/comments`);
+  const promise = axios.get(`/recipes/${recipeId}/comments`);
 
   return {
     promise,
@@ -12,7 +12,7 @@ export const fetchCommentsByRecipeId = recipeId => {
 }
 
 export const addComment = ({ recipeId, author, content, parentCommentId = null }) => {
-  const promise = axios.post(`${recipeId}/comments`, {
+  const promise = axios.post(`/recipes/${recipeId}/comments`, {
     recipeId,
     author,
     content,
