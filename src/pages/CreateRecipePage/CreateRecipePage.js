@@ -10,34 +10,10 @@ import {
   SubmitRecipeForm,
   MetaInfoForm,
 } from './components';
-import { IngredientList } from 'components';
 import { CreateRecipePageWrapper, TitleInput } from './CreateRecipePage.css';
 import { updateRecipeTitle } from 'data/actions';
 
 import { Element } from '../../utils/elementTypes';
-
-const ingredients = [{
-    name: 'cebula',
-    quantity: '1 1/2',
-    unit: 'szt.',
-  }, {
-    name: 'pomidor',
-    quantity: '2 2/3',
-    unit: 'szt.',
-  }, {
-    name: 'mleko',
-    quantity: '300',
-    unit: 'ml',
-  }, {
-    name: 'wołowina',
-    quantity: '1',
-    unit: 'kg',
-  }, {
-    name: 'sól',
-    quantity: '1 3/7',
-    unit: 'łyżeczki',
-  }
-]
 
 
 const CreateRecipePage = ({ updateRecipeTitle, elements = [] }) => {
@@ -89,7 +65,6 @@ const CreateRecipePage = ({ updateRecipeTitle, elements = [] }) => {
 
   return (
     <CreateRecipePageWrapper>
-      <IngredientList ingredients={ingredients} title='test list'/>
       <TitleInput 
         value={title} 
         onChange={e => setTitle(e.target.value)} 

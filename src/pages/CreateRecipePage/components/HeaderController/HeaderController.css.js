@@ -5,7 +5,8 @@ export const HeaderInput = styled.input`
   font-family: 'Kalam', cursive;
   padding: 0 0 1rem 1rem;
   width: calc(100% - 1rem);
-  /* max-width: 800px; */
+  max-width: 800px;
+  display: block;
   margin: 2rem auto;
   font-size: 2em;
   font-weight: 400;
@@ -13,6 +14,7 @@ export const HeaderInput = styled.input`
   border: none;
   outline: none;
   border-bottom: 2px solid black;
+  background-color: #f5f5e6;
   
   &:hover {
     background: lightgrey;

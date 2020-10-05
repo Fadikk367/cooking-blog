@@ -5,6 +5,7 @@ import { ControllerWrapper, ElementControls, Fraction } from 'components';
 import { 
   ListItem,
   ListTitle,
+  List,
   UnitSelect,
   QuantityInput,
 } from './ListController.css';
@@ -17,8 +18,8 @@ const ListController = ({ id, updateRecipeElementData }) => {
   const [listTitle, setListTitle] = useState('');
   const [listItems, setListItems] = useState([{ name: 'marchew', unit: 'szt.', quantity: '3'}, { name: 'kokos', unit: 'g', quantity: '150'}, { name: 'wołowina', unit: 'kg', quantity: '2'}]);
   const [ingredientName, setIngredientName] = useState('');
-  const [ingredientUnit, setIngredientUnit] = useState('');
-  const [ingredientQuantity, setIngredientQuantity] = useState(1);
+  const [ingredientUnit, setIngredientUnit] = useState('kg');
+  const [ingredientQuantity, setIngredientQuantity] = useState('1');
   console.log(listItems);
 
   const handleElementUpdate = id => {
@@ -43,7 +44,7 @@ const ListController = ({ id, updateRecipeElementData }) => {
 
       setListItems(newItems);
       setIngredientName('');
-      setIngredientQuantity(1);
+      setIngredientQuantity('1');
       updateRecipeElementData(id, update);
     }
   }
@@ -62,7 +63,7 @@ const ListController = ({ id, updateRecipeElementData }) => {
 
     return listItems.map(item => (
       <ListItem key={item.name}>
-        {item.name} - {item.quantity} {item.unit}
+        {`${item.name} -  `} <Fraction quantityString={item.quantity}/> {item.unit}
         <button onClick={() => handleDeleteItem(item)}>x</button>
       </ListItem>
     ))
@@ -75,11 +76,7 @@ const ListController = ({ id, updateRecipeElementData }) => {
 
   return (
     <ControllerWrapper>
-      <ElementControls id={id} /><br /><br />
-      {<Fraction quantityString='2 2/5' multiplier={5}/>}<br /><br />
-      {<Fraction quantityString='0 1/7' multiplier={3}/>}<br /><br />
-      {<Fraction quantityString='4 2/3'/>}<br /><br />
-      {<Fraction quantityString='6/2'/>}<br /><br />
+      <ElementControls id={id} />
       <div className="content">
         <ListTitle 
           type="text" 
@@ -88,13 +85,12 @@ const ListController = ({ id, updateRecipeElementData }) => {
           placeholder='list title...'
           onBlur={() => handleElementUpdate(id)}
         />
-        <ul>
-          {<Fraction quantityString='2 2/3'/>}
+        <List>
           {renderedListItems}
           <ListItem isInput={true}>
             <input type="text" value={ingredientName} onChange={e => setIngredientName(e.target.value)} placeholder='składnik'/>
+            <span style={{ paddingRight: '5px' }}> - </span>
             <QuantityInput 
-              type="number" 
               placeholder='ilość...'
               value={ingredientQuantity}
               onChange={e => setIngredientQuantity(e.target.value)}
@@ -108,7 +104,7 @@ const ListController = ({ id, updateRecipeElementData }) => {
             </UnitSelect>
             <button onClick={handleAddItem}>+</button>
           </ListItem>
-        </ul>
+        </List>
       </div>
     </ControllerWrapper>
   )

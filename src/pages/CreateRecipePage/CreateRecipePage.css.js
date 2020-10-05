@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const CreateRecipePageWrapper = styled.div`
   display: flex;
-  width: 100%;
-  max-width: 960px;
+  padding: 2rem;
+  width: calc(100% - 4rem);
+  max-width: 1024px;
   min-height: 70vh;
   margin: 0 auto;
   background: #f5f5e6;
@@ -12,8 +13,9 @@ export const CreateRecipePageWrapper = styled.div`
 
 export const TitleInput = styled.textarea`
   font-family: 'Kalam', cursive;
-  margin: 2rem 2rem 0 2rem;
+  /* margin: 2rem 2rem 0 2rem; */
   padding: 30px;
+  margin-bottom: 30px;
   border: 2px solid black;
   text-align: center;
   font-size: 2.5em;
@@ -22,6 +24,7 @@ export const TitleInput = styled.textarea`
   resize: none;
   height: 50px;
   outline: none;
+  background-color: #f5f5e6;
   transition: background-color 0.3s ease-in-out;
 
   &:hover {

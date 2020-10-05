@@ -36,21 +36,18 @@ export const DropZone = styled.label`
   align-items: center;
   /* transform: translate(-50%, -50%); */
   /* border: 5px dashed lightskyblue; */
-  border: ${props => props.isHidden ? 'none' : '5px dashed lightskyblue'};
-  border-radius: 30px;
-  background: white;
-  background: ${props => props.isHidden ? 'transparent' : 'white'};
+  border: ${props => props.isHidden ? 'none' : '2px solid black'};
+  /* border-radius: 30px; */
+  background: ${props => props.isHidden ? 'transparent' : '#f5f5e6;'};
 
   img {
     width: 150px;
     height: 150px;
-    fill: lightskyblue;
     visibility: ${props => props.isHidden ? 'hidden' : 'visible'};
   }
   
 
   h2 {
-    color: lightskyblue;
     margin: 15px 0 0 0;
     font-weight: 600;
     font-size: 1.4em;
@@ -58,7 +55,6 @@ export const DropZone = styled.label`
   }
 
   h3 {
-    color: lightskyblue;
     margin: 10px 0 0 0;
     font-weight: 400;
     font-size: 1.2em;
