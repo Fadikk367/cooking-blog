@@ -5,3 +5,4 @@ export { default as ControllerWrapper } from './ControllerWrapper';
 export { default as IngredientList } from './IngredientList';
 export { default as Button } from './Button';
 export { default as Fraction } from './Fraction';
+export { default as Modal } from './Modal';
