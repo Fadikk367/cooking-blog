@@ -1,14 +1,26 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const showUp = keyframes`
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 
 export const RecipeCardWrapper = styled.article`
   display: flex;
+  position: relative;
   flex-direction: column;
-  /* border: 1px solid black; */
   background: #f7f7f7;
   height: 100%;
   text-decoration: none;
   color: black;
   overflow: hidden;
+  animation: ${showUp} 0.5s ease-in-out;
 
   -webkit-box-shadow: 10px 10px 17px -6px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 17px -6px rgba(0,0,0,0.75);
@@ -129,5 +141,22 @@ export const RecipeCardFooter = styled.div`
     span {
       padding: 5px;
     }
+  }
+`;
+
+
+export const AdminControls = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  width: calc(100% - 1rem);
+  height: 60px;
+  margin: 0.5rem;
+
+  img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
   }
 `;
