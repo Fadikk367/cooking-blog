@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom'
 
-import { HomePgae, AboutPage, AdminPage, ErrorPage, CreateRecipePage, EditRecipePage } from '../../pages';
+import { HomePgae, AboutPage, AdminPage, ErrorPage, CreateRecipePage, EditRecipePage, ManageRecipesPage } from '../../pages';
 import { PageWrapper } from './Page.css';
 
 
@@ -14,9 +14,9 @@ const Page = () => {
         <Route path='/tips' exact component={AboutPage}/>
         <Route path='/about' exact component={AboutPage}/>
         <Route path='/admin' exact component={AdminPage}/>
-        <Route path='/admin/recipe/new' exact component={CreateRecipePage}/>
-        <Route path='/admin/recipe/edit' exact component={EditRecipePage}/>
-        <Route path='/admin/recipe/delete' exact component={EditRecipePage}/>
+        <Route path='/admin/recipes/new' exact component={CreateRecipePage}/>
+        <Route path='/admin/recipes/edit' exact component={EditRecipePage}/>
+        <Route path='/admin/recipes' component={ManageRecipesPage}/>
         <Route component={ErrorPage}/>
       </Switch>
     </PageWrapper>

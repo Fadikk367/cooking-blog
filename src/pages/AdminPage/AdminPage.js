@@ -15,9 +15,10 @@ const AdminPage = () => {
   return (
     <AdminPageWrapper>
       <AdminActionList>
-        <LinkCard to='admin/recipe/new' icon={fileAddIcon} text='Create recipe' bgColor={'#53b33b'}/>
-        <LinkCard to='admin/recipe/123/edit' icon={fileEditIcon} text='Edit recipe' bgColor={'#e6b329'}/>
-        <LinkCard to='admin/recipe/123/delete' icon={fileDeleteIcon} text='Delete recipe' bgColor={'#e62929'}/>
+        <LinkCard to='admin/recipes' icon={fileAddIcon} text='Manage Recipes' bgColor={'lightskyblue'}/>
+        <LinkCard to='admin/recipes/new' icon={fileAddIcon} text='Create recipe' bgColor={'#53b33b'}/>
+        <LinkCard to='admin/recipes/123/edit' icon={fileEditIcon} text='Edit recipe' bgColor={'#e6b329'}/>
+        <LinkCard to='admin/recipes/123/delete' icon={fileDeleteIcon} text='Delete recipe' bgColor={'#e62929'}/>
       </AdminActionList>
     </AdminPageWrapper>
   )
