@@ -5,16 +5,18 @@ import { SubmitFormWrapper, SubmitButton } from './SubmitRecipeForm.css';
 import { addRecipe } from 'data/actions/admin.actions';
 import { Element } from 'utils/elementTypes'
 
-const SubmitRecipeForm = ({ recipe }) => {
+const SubmitRecipeForm = ({ recipe, addRecipe }) => {
   const handleSubmitForm = async () => {
     const photoElements = Object.values(recipe.elements).filter(element => element.type === Element.PHOTO);
 
     const photoFiles = await Promise.all(photoElements.map(async (element, idx) => {
       const photoBlob = await fetch(element.photo).then(r => r.blob());
+      console.log({ photoBlob });
       const photoFile = new File([photoBlob], `photo${idx}.png`);
       element.photoName = `photo${idx}.png`;
       URL.revokeObjectURL(element.photo);
       delete element.photo;
+      console.log({ photoFile });
       return photoFile;
     }));
 
@@ -36,4 +38,4 @@ const mapStateToProps = state => ({
   recipe: state.admin.recipe,
 });
 
-export default connect(mapStateToProps, null)(SubmitRecipeForm);
+export default connect(mapStateToProps, { addRecipe })(SubmitRecipeForm);

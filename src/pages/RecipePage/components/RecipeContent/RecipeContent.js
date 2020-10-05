@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { RecipeTitle, RecipeHeader, RecipeIngredientList, RecipePhoto, RecipeParagraph } from './RecipeContent.css';
+import { IngredientList } from 'components';
 import { Element } from 'utils/elementTypes';
 
 
@@ -22,12 +23,7 @@ const RecipeContent = ({ recipe }) => {
         break;
       case Element.LIST:
         recipeElement = (
-          <RecipeIngredientList>
-            <h3>{element.title}</h3>
-            <ul key={String(Math.random())}>
-              {element.items.map(item => <li>{item}</li>)}
-            </ul>
-          </RecipeIngredientList>
+          <IngredientList ingredients={element.items} title={element.title}/>
         )
         break;
       default:
