@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Grid, HomePageContainer, Link } from './HomePage.css';
-import RecipeCard from 'components/RecipeCard';
+import { LoadingIndicator, Modal, RecipeCard } from 'components';
 
 import { fetchRecipeCards, fetchRecipeTitles } from 'data/actions';
 
@@ -16,30 +17,33 @@ const HomePage = ({ recipes, fetchRecipeCards, recipesState, fetchRecipeTitles }
   }, [fetchRecipeCards, fetchRecipeTitles]);
 
   const isLoaded = useMemo(() => {
-    return (recipesState && Object.keys(recipesState) === 0)
+    return (recipesState && Object.keys(recipesState).length === 0)
   }, [recipesState]);
 
   const renderedRecipes = recipes.map(recipe => (
-    // <RecipeCard>
-    //   <Link to={`recipes/${recipe._id}`} key={recipe._id}>
-    //     <div>
-    //       <h3>{recipe.title}</h3>
-    //       <p>{recipe.content}</p>
-    //       <span>{recipe.date}</span>
-    //     </div>
-    //   </Link>
-    // </RecipeCard>
     <Link to={`recipes/${recipe._id}`} key={recipe._id}>
-      <RecipeCard {...recipe} />
+      <RecipeCard {...recipe}/>
     </Link>
     ));
 
 
   return (
     <HomePageContainer>
-      <Grid>
+      {isLoaded 
+      ? (
+        <Grid>
         {renderedRecipes}
-      </Grid>
+        </Grid>
+      ) : (
+      <LoadingIndicator />
+      )}
+      <Switch>
+        <Route path='admin/recipes/:recipeId/delete'>
+          <Modal>
+
+          </Modal>
+        </Route>
+      </Switch>
     </HomePageContainer>
   )
 }
