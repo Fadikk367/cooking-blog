@@ -25,5 +25,6 @@ export const FractionLine = styled.span`
 
 export const Denominator = styled.span`
   top: 0.3em;
+  right: 0.2em;
   font-size: 0.7em;
 `;

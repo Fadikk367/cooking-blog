@@ -39,7 +39,7 @@ export const ListTitle = styled.h3`
 
 
 export const List = styled.ul`
-  list-style-type: disc;
+  list-style-type: circle;
   padding: 0.5rem 2rem;
   font-family: 'Kalam', cursive;
   font-size: 1.5em;

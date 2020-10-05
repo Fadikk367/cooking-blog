@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 
 import { ListWrapper, ListHeader, ListTitle, List, ListItem } from './IngredientList.css';
+import { Fraction } from 'components';
 
 
 const IngredientList = ({ title, ingredients = [] }) => {
@@ -10,7 +11,7 @@ const IngredientList = ({ title, ingredients = [] }) => {
     <ListItem 
       key={ingredient.name}
     >
-      {ingredient.name} - {ingredient.quantity*portions} {ingredient.unit}
+      {ingredient.name} - <Fraction quantityString={ingredient.quantity} multiplier={portions}/> {ingredient.unit}
     </ListItem>
   ));
 
