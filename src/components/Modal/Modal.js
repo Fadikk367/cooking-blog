@@ -16,7 +16,6 @@ const Modal = ({ children }) => {
     <ModalWrapper onClick={handleCloseModal}>
       <ModalContent onClick={e => e.stopPropagation()}>
         <CloseButton onClick={handleCloseModal}>&times;</CloseButton>
-        mooodal
         {children}
       </ModalContent>
     </ModalWrapper>,
