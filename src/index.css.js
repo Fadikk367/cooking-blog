@@ -28,12 +28,6 @@ export default createGlobalStyle`
     font-family: 'Poppins', sans-serif;
     position: relative;
   }
-
-  #modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
  
   ul {
     list-style: none;
