@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 
 // Import middlewares
 const bodyParser = require('body-parser');
@@ -40,6 +41,7 @@ const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(helmet());
+app.use(morgan('common'));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
