@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
@@ -9,7 +9,10 @@ import {
   RecipeDetailRow,
 } from './ConfirmRecipeDeletePopup.css';
 
+import { deleteRecipe } from 'data/actions';
+
 const ConfirmRecipeDeletePopup = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const { recipeId } = useParams();
   const recipeThumbnail = useSelector(
@@ -20,6 +23,7 @@ const ConfirmRecipeDeletePopup = () => {
 
   const handleConrifmDeleteRecipe = () => {
     console.log(`Delete recipe: ${recipeId} request`);
+    dispatch(deleteRecipe(recipeId, 'SECRET'));
     history.goBack();
   }
   return (

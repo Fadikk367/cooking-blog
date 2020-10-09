@@ -11,6 +11,10 @@ import {
   RECIPES_ADD_SUCCESS,
   RECIPES_ADD_FAILURE,
 
+  RECIPE_DELETE_REQUEST,
+  RECIPE_DELETE_SUCCESS,
+  RECIPE_DELETE_FAILURE,
+
   LOADING_STATES,
 } from '../constants';
 
@@ -94,6 +98,36 @@ const recipesReducer = (state = initialState, action) => {
     }
     case RECIPE_GET_FAILURE: {
       delete loadingStateCopy.RECIPE_GET_REQUEST;
+      return {
+        ...state,
+        loadingState: loadingStateCopy
+      };
+    }
+    case RECIPE_DELETE_REQUEST: {
+      return {
+        ...state,
+        loadingState: {
+          ...state.loadingState,
+          [action.type]: LOADING_STATES.LOADING
+        }
+      };
+    }
+    case RECIPE_DELETE_SUCCESS: {
+      delete loadingStateCopy.RECIPE_DELETE_REQUEST;
+
+      const deletedRecipeId = action.payload.deletedRecipe._id;
+      const deletedRecipeCardIndex = state.recipeCards.findIndex(recipeCard => recipeCard._id === deletedRecipeId);
+      state.recipeCards.splice(deletedRecipeCardIndex, 1);
+
+      return {
+        ...state,
+        recipeCards: [...state.recipeCards],
+        loadingState: loadingStateCopy
+      };
+    }
+    case RECIPE_DELETE_FAILURE: {
+      delete loadingStateCopy.RECIPE_DELETE_REQUEST;
+
       return {
         ...state,
         loadingState: loadingStateCopy

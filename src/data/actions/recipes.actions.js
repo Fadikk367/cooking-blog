@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { RECIPES_GET, RECIPES_ADD, RECIPE_GET } from '../constants';
+import { RECIPES_GET, RECIPES_ADD, RECIPE_GET, RECIPE_DELETE } from '../constants';
 
 export const fetchRecipeCards = () => {
   const promise = axios.get('/recipes');
@@ -11,7 +11,7 @@ export const fetchRecipeCards = () => {
 }
 
 export const fetchRecipe = recipeId => {
-  const promise = axios.get(`/recipe/${recipeId}`);
+  const promise = axios.get(`/recipes/${recipeId}`);
 
   return {
     promise,
@@ -30,5 +30,20 @@ export const addRecipe = ({ title, content, difficulty, ingredients }) => {
   return {
     promise,
     type: RECIPES_ADD
+  };
+}
+
+export const deleteRecipe = (recipeId, authToken) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  }
+
+  const promise = axios.delete(`/recipes/${recipeId}`, config);
+
+  return {
+    promise,
+    type: RECIPE_DELETE
   };
 }
