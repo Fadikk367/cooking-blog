@@ -30,7 +30,7 @@ const AddCommentForm = ({ addComment, recipeId, parentCommentId = null }) => {
   return (
     <CommentFormContainer>
       <form onSubmit={handleAddComment}>
-        <input type="text" value={author} name="pseudonim" placeholder="nickname" onChange={(e) => setAuthor(e.target.value)}/>
+        <input type="text" value={author} name="author" placeholder="nickname" onChange={(e) => setAuthor(e.target.value)}/>
         <textarea type="text" value={content} name="content" placeholder="comment..." onChange={(e) => setContent(e.target.value)}/>
         <button type="submit">Dodaj</button>
       </form>

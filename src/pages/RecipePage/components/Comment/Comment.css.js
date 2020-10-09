@@ -2,15 +2,18 @@ import styled from 'styled-components';
 
 export const CommentContainer = styled.li`
   padding: 1rem;
-  margin-bottom: 10px;
-  border-radius: 20px;
-  background: rgb(222, 222, 222);
+  margin-bottom: 15px;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 5px 5px 10px -3px rgba(97,97,97,1);
 `;
 
 export const CommentHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 5px;
+  border-bottom: 1px solid black;
 
   .comment-author {
     font-size: 1.3em;
@@ -35,25 +38,25 @@ export const CommentControlBar = styled.div`
   display: flex;
   align-items: center;
   height: 40px;
-  background: lightgray;
+  padding-top: 3px;
+  border-top: 1px solid black;
 
-  .toggle-answers-btn, .answer-btn, .like-btn {
-    padding: 0.2rem;
+  .reactions {
+    /* justify-self: flex-end; */
+    display: flex;
+    margin-left: auto;
+  }
+
+  .toggle-answers-btn, .answer-btn {
+    background-color: lightgrey;
+    padding: 5px 10px;
     border: none;
     border-radius: 5px;
+    margin-right: 10px;
     font-size: 1.1em;
     color: rgb(20, 13, 120);
-    background: white;
     font-weight: 500;
     cursor: pointer;
-  }
-
-  .like-btn {
-    justify-self: flex-end;
-  }
-
-  .toggle-answers-btn {
-    width: 200px;
   }
 `;
 
@@ -61,13 +64,13 @@ export const CommentControlBar = styled.div`
 
 
 export const ReactionBtn = styled.button`
-display: flex;
-justify-content: center;
-align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
   outline: none;
+  background: transparent;
   cursor: pointer;
-
 `;
 
 export const ReactionIcon = styled.img`

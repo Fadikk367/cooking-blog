@@ -11,6 +11,7 @@ import wowIcon from 'svgs/wow.svg';
 
 const Comment = ({ commentData, indentLevel = 0 }) => {
   const { recipeId, _id, date, author, content, answers } = commentData;
+  const formatedDate = date.substring(0, 16).replace('T', ' ');
   console.log(commentData);
   const [showAnswers, setShowAnswers] = useState(false);
   const [comments, setComments] = useState([]);
@@ -80,7 +81,7 @@ const Comment = ({ commentData, indentLevel = 0 }) => {
       <CommentContainer>
         <CommentHeader>
           <span className="comment-author">{author}</span>
-          <span className="comment-date">{date}</span>
+          <span className="comment-date">{formatedDate}</span>
         </CommentHeader>
         <CommentBody>
           {content}
@@ -88,7 +89,7 @@ const Comment = ({ commentData, indentLevel = 0 }) => {
         <CommentControlBar>
           <button className="answer-btn" onClick={handleAnswerToComment}>odpowiedz</button>
           <button className="toggle-answers-btn" onClick={handleToggleAnswers}>{showAnswers ? 'ukryj odpowiedzi' : `pokaż odpowiedzi (${answers.length})`}</button>
-          <button className="like-btn">+1</button>
+          <div className="reactions">
           <ReactionBtn>
             <ReactionIcon src={thumbsUpIcon}  name='likes' onClick={handleAddReaction}/>
             <ReactionCounter>{reactions.likes}</ReactionCounter>
@@ -101,6 +102,7 @@ const Comment = ({ commentData, indentLevel = 0 }) => {
             <ReactionIcon src={wowIcon}  name='wows' onClick={handleAddReaction}/>
             <ReactionCounter>{reactions.wows}</ReactionCounter>
           </ReactionBtn>
+          </div>
         </CommentControlBar>
         </CommentContainer>
           {showAnswers 

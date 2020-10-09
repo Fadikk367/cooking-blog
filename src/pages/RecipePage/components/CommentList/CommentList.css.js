@@ -6,13 +6,16 @@ export const CommentListContainer = styled.ul`
   list-style-type: none;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 export const ReplyFormButton = styled.button`
-  background: white;
+  background: orange;
   font-size: 1.3rem;
-  border: 1px solid black;
-  border-radius: 15px;
-  padding: 0.3rem;
-  margin-bottom: 20px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 7px 15px;
 `;

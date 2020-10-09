@@ -21,8 +21,8 @@ const CommentsSection = ({ recipeId, fetchCommentsByRecipeId, comments, comments
 
   return (
     <CommentsSectionContainer>
-      <CommentsSectionHeader>Dodaj komentarz:</CommentsSectionHeader>
-      <AddCommentForm recipeId={recipeId}/>
+      {/* <CommentsSectionHeader>Dodaj komentarz:</CommentsSectionHeader>
+      <AddCommentForm recipeId={recipeId}/> */}
       <CommentsSectionHeader>Komentarze: ({ commentsIds.length })</CommentsSectionHeader>
       { isLoaded ? <CommentList recipeId={recipeId} comments={comments} indentLevel={0} isOpen={true}/> : <LoadingIndicator />}
     </CommentsSectionContainer>
