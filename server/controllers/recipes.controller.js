@@ -1,6 +1,6 @@
 const { Recipe, Comment } = require('../models');
 const mongoose = require('mongoose');
-const { element } = require('prop-types');
+const aws = require('aws-sdk');
 
 exports.getAllRecipes = async (req, res, next) => {
   const { count, blocks } = req.query;
@@ -23,6 +23,7 @@ exports.getFullRecipe = async (req, res, next) => {
 
   try {
     const recipe = await Recipe.findById(recipeId).populate(commentsPopulated === 'true' ? 'comments' : null);
+    console.log(recipe);
     res.json(recipe);
   } catch(err) {
     next(err);
@@ -36,6 +37,7 @@ exports.postRecipe = async (req, res, next) => {
     metadata,
   } = req.body;
   const photos = req.files;
+  console.log({ photos });
   const elements =  JSON.parse(req.body.elements);
   metadata = JSON.parse(metadata);
 
@@ -59,6 +61,42 @@ exports.postRecipe = async (req, res, next) => {
     const createdRecipe = await recipe.save();
     res.json({ createdRecipe, message: 'Successfully created new recipe' });
   } catch(err) {
+    next(err);
+  }
+}
+
+exports.deleteRecipe = async (req, res, next) => {
+  const recipeId = req.params.recipeId;
+
+  const s3 = new aws.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    Bucket: process.env.AWS_BUCKET_NAME,
+  });
+
+  try {
+    const deletedRecipe = await Recipe.findOneAndDelete({ _id: recipeId });
+    await Comment.deleteMany({ recipeId: deletedRecipe._id });
+    
+    console.log(deletedRecipe);
+    const photoElements= deletedRecipe.elements.filter(element => element.type === 'PHOTO');
+    const photoURIs = extractPhotoNamesFromElements(photoElements);
+
+    const params = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Delete: {
+        Objects: photoURIs
+      }
+    }
+
+    s3.deleteObjects(params, (err, data) => {
+      if (err) console.log(err, err.stack);
+      else console.log('delete', data);
+    });
+
+    res.json({ deletedRecipe, message: 'Recipe deleted' });
+  } catch(err) {
+    console.log(err);
     next(err);
   }
 }
@@ -137,4 +175,14 @@ exports.getAllRecipeTitles = async (req, res ,next) => {
   } catch(err) {
     next(err);
   }
+}
+
+
+function extractPhotoNamesFromElements(elements) {
+  const photoNames = elements.map(element => {
+    const index = element.photo.indexOf('photo');
+    return { Key: element.photo.substring(index) };
+  });
+
+  return photoNames;
 }

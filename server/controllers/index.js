@@ -1,4 +1,4 @@
-const recipesController = require('.//recipes.controller');
+const recipesController = require('./recipes.controller');
 const commentsController = require('./comments.controller');
 
 module.exports = {
