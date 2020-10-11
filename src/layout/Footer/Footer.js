@@ -1,12 +1,23 @@
 import React from 'react';
 
-import { FooterWrapper } from './Footer.css';
+import { FooterWrapper, FooterRow, FooterLogo } from './Footer.css';
+import { SubscribeNewsletterForm, SocialMedia, TableOfContent, Copyrights } from './components';
 
 
 const Footer = () => {
   return (
     <FooterWrapper>
-      Footer here
+      <FooterRow>
+        <SubscribeNewsletterForm />
+        <SocialMedia />
+        <FooterLogo>Wiesia Gotuje</FooterLogo>
+      </FooterRow>
+      <FooterRow>
+        <TableOfContent />
+      </FooterRow>
+      <FooterRow>
+        <Copyrights />
+      </FooterRow>
     </FooterWrapper>
   )
 }
