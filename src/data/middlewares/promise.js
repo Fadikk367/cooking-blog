@@ -23,7 +23,7 @@ export default () => next => action => {
       });
     })
     .catch(error => {
-
+      console.log(error);
       next({ 
         type: FAILURE, 
         error, 
