@@ -1,7 +1,9 @@
-const recipesRoute = require('./recipes.route');
-const commentsRoute = require('./comments.route');
+const recipesRoutes = require('./recipes.routes');
+const commentsRoutes = require('./comments.routes');
+const adminRoutes = require('./comments.routes');
 
 module.exports = {
-  recipesRoute,
-  commentsRoute
+  recipesRoutes,
+  commentsRoutes,
+  adminRoutes
 };

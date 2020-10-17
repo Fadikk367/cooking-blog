@@ -5,7 +5,7 @@ import { Element } from '../../utils/elementTypes';
 
 const initialState = {
   auth: {
-    isAuthentificated: false,
+    isAuthentificated: true,
     authToken: null,
   },
   recipe: {
